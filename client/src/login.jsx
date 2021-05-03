@@ -52,10 +52,13 @@ const LogIn = () => {
                 else {
                     setLogInStatus("Bienvenido " + response.data[0].nombre + " " + response.data[0].apellidos)
                     console.log("Frontend and backend connected.")
-                    if (response.data[0].nombre === "admin") { history.push('/registerDashboard') }
-                    history.push('/dashboard')
+                    if (response.data[0].nombre === "admin") {
+                        history.push('/registerDashboard')
+                    }
+                    else {
 
-
+                        history.push('/dashboard')
+                    }
                 }
             })
 

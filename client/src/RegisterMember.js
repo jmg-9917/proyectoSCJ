@@ -1,10 +1,10 @@
 
 import './App.css';
-import {useState} from 'react';
+import { useState } from 'react';
 import Axios from 'axios'
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Snackbar, Alert, TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Snackbar, Alert, TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 import validator from 'validator';
 
 const RegisterMember = () => {
@@ -89,6 +89,22 @@ const RegisterMember = () => {
             setCorreoError('Inserte un correo electronico valido.')
             errors.emailError = true
         }
+        if (password.length < 3) {
+            errors.passwordError = true
+            setPasswordError('La contraseña debe de tener mas de 3 caracteres.')
+        }
+        else {
+            setPasswordError('')
+            errors.passwordError = false
+        }
+        if (passwordConfirmation.length < 3) {
+            setPasswordConfirmationError('La contraseña debe de tener mas de 3 caracteres.')
+            errors.passwordConfirmationError = true
+        }
+        else {
+            setPasswordConfirmationError('')
+            errors.passwordConfirmationError = false
+        }
         return errors
     }
 
@@ -100,28 +116,37 @@ const RegisterMember = () => {
     }
     const registrarIntegrante = () => {
         setActivo(true)
-        const correctPassword = comparePasswords();
-        if (correctPassword) {
-            Axios.post('http://localhost:3002/create', {
-                nombre: nombre,
-                apellidos: apellidos,
-                telefono: telefono,
-                puesto: puesto,
-                correo: correo,
-                fecha: fecha,
-                password: password,
-                activo: activo
-            }).then(() => {
-                console.log(fecha)
-                console.log("Frontend and backend connected.")
-                document.getElementById("integrante-form").reset();
+        const errorsDetected = errorInFields()
+        if (errorsDetected.nombreError === false || errorsDetected.apellidosError === false || errorsDetected.telefonoError === false || errorsDetected.puestoError === false || errorsDetected.correoError === false || errorsDetected.passwordError === false || errorsDetected.passwordConfirmationError === false) {
 
-            })
+            const correctPassword = comparePasswords();
+            if (correctPassword) {
+                setPasswordConfirmationError('')
+                Axios.post('http://localhost:3002/create', {
+                    nombre: nombre,
+                    apellidos: apellidos,
+                    telefono: telefono,
+                    puesto: puesto,
+                    correo: correo,
+                    fecha: fecha,
+                    password: password,
+                    activo: activo
+                }).then(() => {
+                    console.log(fecha)
+                    console.log("Frontend and backend connected.")
+                    document.getElementById("integrante-form").reset();
 
+                })
+
+            }
+            else {
+                setPasswordConfirmationError('Las contraseñas no coinciden')
+            }
         }
         else {
-            console.log("Las contraseñas no concuerdan.")
+            console.log('denied')
         }
+
 
     };
     return (<div className="App">

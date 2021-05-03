@@ -90,11 +90,8 @@ app.post('/create', async (req, res) => {
     const fecha = req.body.fecha
     const activo = req.body.activo
 
-
-    const hashedPassword = await bcrypt.hash(password, 10)
-    console.log(hashedPassword)
     db.query('INSERT INTO Integrante (nombre,apellidos,telefono,correo_electronico,contraseña,fechaInscripcion,puesto,activo) VALUES (?,?,?,?,?,?,?,?)',
-        [nombre, apellidos, telefono, correo, hashedPassword, fecha, puesto, activo],
+        [nombre, apellidos, telefono, correo, password, fecha, puesto, activo],
         (err, result) => {
 
             if (err) {console.log(err)}
@@ -142,9 +139,8 @@ app.post('/login', async (req, res) => {
         console.log(req);
         const correo = req.body.correo
         const password = req.body.password
-        const hashed = await bcrypt.hash(password, 10)
-        db.query("SELECT * FROM Integrante WHERE correo_electronico = ? AND contraseña =?",
-            [correo, hashed], (err, result) => {
+        db.query("SELECT * FROM Integrante WHERE correo_electronico = ? AND contraseña =? ",
+            [correo, password], (err, result) => {
                 if (err) {
                     res.send({err: err})
                 }

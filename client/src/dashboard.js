@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import App from './App.css';
-import {Redirect, BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Axios from 'axios';
 import BuscarEvento from './BuscarEvento';
 import BuscarIntegrante from './BuscarIntegrante';

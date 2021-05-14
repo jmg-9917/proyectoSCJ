@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {TextField, Button} from '@material-ui/core';
 
 function BuscarEvento() {
     const [nombreEvento, setNombreEvento] = useState("");
@@ -10,7 +11,7 @@ function BuscarEvento() {
             <h1>Buscar evento</h1>
             <div className="information">
                 <label>Nombre del evento:</label>
-                <input
+                <TextField
                     type="text"
                     onChange={(event) => {
                         setNombreEvento(event.target.value)
@@ -18,14 +19,14 @@ function BuscarEvento() {
                     }}
                 />
                 <label>Ciudad:</label>
-                <input
+                <TextField
                     type="text"
                     onChange={(event) => {
                         setCiudad(event.target.value)
 
                     }}
                 />
-                <button>Continuar</button>
+                <Button>Continuar</Button>
             </div>
         </div>
     )

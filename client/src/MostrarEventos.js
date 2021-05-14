@@ -1,31 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import App from './App.css';
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 function MostrarEventos() {
     const [eventos, setEventos] = useState([]);
     useEffect(() => {
+        let isMounted = true;
         Axios.get("http://localhost:3002/eventos")
             .then((response) => {
-                setEventos(response.data)
+                if (isMounted) {
+                    setEventos(response.data)
+                }
             }, [])
+        return () => {isMounted = false};
 
     })
     return (
         <div className="eventos">
             <h1>Mostrar todos los eventos</h1>
-            {eventos.map((val, key) => {
+            {eventos.map((val) => {
                 var nacionalText = ""
                 if (val.nacional === 1) {
                     nacionalText = "Nacional"
 
                 }
-                else { nacionalText = "Local" }
+                else {nacionalText = "Local"}
                 return (
-                    <div className="evento">
-                        <h1>{val.nombreEvento}</h1>
-                        <h3>{val.ciudad}</h3>
-                        <h3>{nacionalText}</h3>
-                    </div>
+                    <>
+                        <Card className="Card-appearence" >
+                            <Card.Body>
+                                <Card.Title>{val.nombreEvento}</Card.Title>
+                                <Card.Text>{val.ciudad}</Card.Text>
+                                <Card.Text>{nacionalText}</Card.Text>
+                                <Card.Text>{val.descripcion}</Card.Text>
+                                <Button>Inscribete al evento!</Button>
+                            </Card.Body>
+                        </Card>
+                    </>
 
                 )
 

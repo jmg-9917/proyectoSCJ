@@ -6,7 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-
+const axios = require('axios');
 
 app.use(express.json());
 app.use(cors({
@@ -63,6 +63,47 @@ app.get('/eventos', (req, res) => {
     })
 })
 
+app.get('/buscarIntegrantes', async (req, res) => {
+    const nombre = req.body.nombre;
+    const apellidos = req.body.apellidos;
+    db.query("SELECT nombre, apellidos FROM Integrante WHERE nombre like '%?%'", [
+        nombre
+    ], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
+
+
+app.post('/reCaptcha', async (req, res, next) => {
+    if (!req.body.token) {
+        res.send("no token")
+    }
+    try {
+        const secret = "6LdSbs0aAAAAAAgd-H0HdXPm7XSAksx7drVchfBW"
+        const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret + "&response=" + req.body.token
+
+        const response = await axios.post(url)
+        const {success} = response.data
+
+        if (success) {
+            console.log(success)
+            res.send(response.data)
+        }
+        else {
+            res.send(response.data)
+
+
+        }
+    } catch (e) {
+        console.log(e)
+    }
+})
+
 app.post('/createJunta', async (req, res) => {
     const tipo = req.body.tipo
     const descripcion = req.body.descripcion
@@ -106,12 +147,12 @@ app.post('/createEvent', async (req, res) => {
     const nombre = req.body.nombreEvento
     const ciudad = req.body.ciudad
     const nacional = req.body.nacional
-
+    const descripcion = req.body.descripcion
 
     //const hashedPassword = await bcrypt.hash(password, 10)
     //console.log(hashedPassword)
-    db.query('INSERT INTO Eventos (nombreEvento,ciudad,nacional) VALUES (?,?,?)',
-        [nombre, ciudad, nacional],
+    db.query('INSERT INTO Eventos (nombreEvento,ciudad,nacional,descripcion) VALUES (?,?,?,?)',
+        [nombre, ciudad, nacional,descripcion],
         (err, result) => {
 
             if (err) {console.log(err)}

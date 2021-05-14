@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Axios from 'axios';
-import { Hidden } from '@material-ui/core';
+import {Hidden} from '@material-ui/core';
 
 const userLoggedIn = () => {
     Axios.get('http://localhost:3002/login').then((response) => {
         if (response.data.length === 0) {
             return false
         }
-        else { return true }
+        else {return true}
     })
 }
 

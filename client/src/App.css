@@ -3,6 +3,35 @@ App {
   display: flex;
 }
 
+.opening-navbar-location{
+    z-index: auto;
+}
+.opening-mainpage-location{
+    z-index: auto;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+body{
+    padding-top: 3rem;
+    padding-left: 1em;
+    padding-right: 1em;
+
+}
+
 nav{
     display: flex;
     justify-content: space-around;
@@ -12,6 +41,10 @@ nav{
     color: white;
     font-family: Arial; 
     
+}
+
+.login-Form{
+    align-content: center;
 }
 
 .nav-links {
@@ -27,7 +60,7 @@ nav{
     display: flex;
     flex-direction: column;
     padding-top: 2rem;
-    column-gap: 3rem;
+    column-gap: 7rem;
     width: 100%;
     align-items: stretch;
     justify-content: center;
@@ -35,11 +68,20 @@ nav{
     font-family: Arial;
 }
 
+.information label{
+    padding: 2rem;
+}
+
+.recaptcha-Spacing{
+    padding: 2rem;
+}
+
 .information input {
-    width: 10rem;
+    width: 20rem;
     height: 1rem;
-    font-size: small;
+    font-size: medium;
     padding-left: .5rem;
+    padding-top: 5 rem;
 }
 
 .eventos{
@@ -56,4 +98,8 @@ nav{
     margin: 10px;
     padding-left: 2rem;
     font-family: Arial;
+}
+
+.Card-appearence{
+    width: 50rem;
 }

@@ -1,16 +1,21 @@
 
 import './App.css';
-import {useState} from 'react';
+import { useState, useRef } from 'react';
 import Axios from 'axios'
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Snackbar, Alert, TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
-
+import React from 'react';
+import { TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import ReCAPTCHA from 'react-google-recaptcha';
+import ShowAlert from './Flash-message-component';
 const RegisterEvent = () => {
     const [nombreEvento, setNombreEvento] = useState("");
     const [ciudad, setCiudad] = useState("");
     const [nacional, setNacional] = useState(false);
     const [radioValue, setRadioValue] = useState("no");
+    const [descripcion, setDescripcion] = useState('');
+    const [token, setToken] = useState("");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(null);
+    const reCaptcha = useRef();
     const registrarEvento = () => {
 
         if (radioValue === "si") {
@@ -21,13 +26,44 @@ const RegisterEvent = () => {
             setNacional(true)
             console.log(nacional)
         }
-        Axios.post('http://localhost:3002/createEvent', {
-            nombreEvento: nombreEvento,
-            ciudad: ciudad,
-            nacional: nacional
-        }).then(() => {
-            console.log("Frontend and backend connected.")
-        })
+
+        if (!token) {
+            setError("Verify captcha")
+            setSuccess(false)
+            ShowAlert(success, 'evento')
+            return;
+        }
+        else {
+            setError("")
+
+            Axios.post('http://localhost:3002/reCaptcha', {
+                token: token
+            }).then(() => {
+                reCaptcha.current.reset();
+                setToken("");
+                alert("Sign in success");
+
+                Axios.post('http://localhost:3002/createEvent', {
+                    nombreEvento: nombreEvento,
+                    ciudad: ciudad,
+                    nacional: nacional,
+                    descripcion: descripcion
+                }).then(() => {
+                    console.log("Frontend and backend connected.")
+                    setSuccess(true)
+                    ShowAlert(success, 'evento')
+                })
+
+            })
+                .catch(e => {
+                    setError(e)
+                })
+                .finally(() => {
+                    setToken("");
+                })
+
+        }
+
     };
 
     return (
@@ -36,6 +72,7 @@ const RegisterEvent = () => {
             <label>Nombre del evento:</label>
             <TextField
                 type="text"
+                label="Nombre del evento"
                 onChange={(event) => {
                     setNombreEvento(event.target.value)
 
@@ -44,6 +81,7 @@ const RegisterEvent = () => {
             <label>Ciudad</label>
             <TextField
                 type="text"
+                label="Ciudad"
                 onChange={(event) => {
                     setCiudad(event.target.value)
 
@@ -58,6 +96,24 @@ const RegisterEvent = () => {
                 <FormControlLabel value="si" control={<Radio />} label="Si" />
                 <FormControlLabel value="no" control={<Radio />} label="No" />
             </RadioGroup>
+            <TextField
+                type="text"
+                label="Descripcion"
+                multiline
+                rowsMax={4}
+                onChange={(event) => {
+                    setDescripcion(event.target.value)
+                }
+                }
+            ></TextField>
+            <ReCAPTCHA className="recaptcha-Spacing"
+                sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
+                onChange={token => {
+                    setToken(token)
+                }}
+                onExpired={e => setToken("")}
+                ref={reCaptcha}
+            ></ReCAPTCHA>
             <Button variant="outlined" onClick={registrarEvento}>Registrar evento</Button>
         </div>
 

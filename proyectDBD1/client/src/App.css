@@ -1,0 +1,59 @@
+App {
+  text-align: center;
+  display: flex;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(73,79,82);
+    color: white;
+    font-family: Arial; 
+    
+}
+
+.nav-links {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    
+}
+
+.information{
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    column-gap: 3rem;
+    width: 100%;
+    align-items: stretch;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+}
+
+.information input {
+    width: 10rem;
+    height: 1rem;
+    font-size: small;
+    padding-left: .5rem;
+}
+
+.eventos{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.evento{
+    width: 40rem;
+    height: 15rem;
+    border: 1px solid black;
+    margin: 10px;
+    padding-left: 2rem;
+    font-family: Arial;
+}

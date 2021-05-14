@@ -1,0 +1,175 @@
+const express = require("express");
+const app = express();
+const mysql = require("mysql")
+const bcrypt = require("bcryptjs")
+const cors = require('cors');
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
+
+app.use(express.json());
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    key: "userId",
+    secret: "suscribed",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 60 * 24
+    }
+}))
+
+const db = mysql.createConnection({
+    user: "root",
+    host: "localhost",
+    password: "HvF:V=`n^G25j3:<",
+    database: "SCJDatabase"
+})
+
+app.get('/evento', (req, res) => {
+    const nombreEvento = req.body.nombreEvento
+    const ciudad = req.body.ciudad
+    db.query("SELECT * FROM Eventos WHERE nombreEvento = ? AND ciudad =?",
+        [nombreEvento, ciudad], (err, result) => {
+            if (err) {
+                res.send({ err: err })
+            }
+            if (result) {
+                res.send(result)
+            }
+            else {
+                res.send({ message: "Wrong combination" })
+            }
+        })
+})
+
+app.get('/eventos', (req, res) => {
+    db.query("SELECT * FROM Eventos", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
+
+app.post('/createJunta', async (req, res) => {
+    const tipo = req.body.tipo
+    const descripcion = req.body.descripcion
+    const partipantes = req.body.participantes
+
+    db.query("INSERT INTO Juntas (tipo,descripcion,participantes) VALUES(?,?,?)",
+        [tipo, descripcion, partipantes],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else {
+                res.send(result)
+
+            }
+        })
+})
+
+app.post('/create', async (req, res) => {
+    console.log(req);
+    const nombre = req.body.nombre
+    const correo = req.body.correo
+    const apellidos = req.body.apellidos
+    const telefono = req.body.telefono
+    const puesto = req.body.puesto
+    const password = req.body.password
+    const fecha = req.body.fecha
+    const activo = req.body.activo
+
+
+    //const hashedPassword = await bcrypt.hash(password, 10)
+    //console.log(hashedPassword)
+    db.query('INSERT INTO Integrante (nombre,apellidos,telefono,correo_electronico,contraseña,fechaInscripcion,puesto,activo) VALUES (?,?,?,?,?,?,?,?)',
+        [nombre, apellidos, telefono, correo, password, fecha, puesto, activo],
+        (err, result) => {
+
+            if (err) { console.log(err) }
+            else { res.send("Values inserted") }
+
+        }
+    );
+});
+
+app.post('/createEvent', async (req, res) => {
+    console.log(req);
+    const nombre = req.body.nombreEvento
+    const ciudad = req.body.ciudad
+    const nacional = req.body.nacional
+
+
+    //const hashedPassword = await bcrypt.hash(password, 10)
+    //console.log(hashedPassword)
+    db.query('INSERT INTO Eventos (nombreEvento,ciudad,nacional) VALUES (?,?,?)',
+        [nombre, ciudad, nacional],
+        (err, result) => {
+
+            if (err) { console.log(err) }
+            else { res.send("Values inserted") }
+
+        }
+    );
+});
+
+
+
+
+app.get('/login', (req, res) => {
+    if (req.session.user) {
+
+        res.send({ loggedIn: true, user: req.session.user });
+    }
+    else {
+        res.send({ loggedIn: false });
+    }
+})
+
+app.post('/login', async (req, res) => {
+    try {
+        console.log(req);
+        const correo = req.body.correo
+        const password = req.body.password
+        //const hashed = await bcrypt.hash(password, 10)
+        //const equal = bcrypt.compare(password, hashed)
+        db.query("SELECT * FROM Integrante WHERE correo_electronico = ? AND contraseña =?",
+            [correo, password], (err, result) => {
+                if (err) {
+                    res.send({ err: err })
+                }
+                if (result) {
+                    req.session.user = result;
+                    console.log(req.session.user);
+                    res.send(result)
+                }
+                else {
+                    res.send({ message: "Wrong combination" })
+                }
+            })
+
+    }
+
+    catch (e) {
+        console.log(e);
+        res.status(500).send('error ocurred');
+    }
+
+
+});
+
+
+app.listen(3002, () => {
+    console.log("Server started on port 3002.");
+});

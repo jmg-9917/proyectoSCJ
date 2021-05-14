@@ -1,21 +1,25 @@
 import React from 'react';
 import Axios from 'axios';
-import {useState} from 'react';
-import {useHistory, Link} from 'react-router-dom';
+import { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 
 function WelcomeComponent() {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");
-    const history = useHistory()
-    function userDataRetrieved() {
+    const history = useHistory();
+
+    function userFound() {
         Axios.get("http://localhost:3002/login").then((response) => {
-            setNombre(response.data.user[0].nombre)
-            setApellidos(response.data.user[0].apellidos)
-
-
+            if (response.data.user[0]) {
+                setNombre(response.data.user[0].nombre)
+                setApellidos(response.data.user[0].apellidos)
+            }
+            else {
+                history.push('/login')
+            }
         })
     }
-    userDataRetrieved()
+    userFound()
     return (
         <div>
             <h1>Bienvenido {nombre + " " + apellidos} </h1>

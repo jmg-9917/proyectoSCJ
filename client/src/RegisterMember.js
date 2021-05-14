@@ -1,12 +1,13 @@
 
 import './App.css';
-import { useState } from 'react';
+import {useState, useRef} from 'react';
 import Axios from 'axios'
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Snackbar, Alert, TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import React from 'react';
+import {TextField, Button} from '@material-ui/core'
 import validator from 'validator';
-
+import GetFormattedDate from './GetFormattedDate';
+import ReCAPTCHA from 'react-google-recaptcha';
+import ShowAlert from './Flash-message-component';
 const RegisterMember = () => {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");
@@ -15,6 +16,9 @@ const RegisterMember = () => {
     const [correo, setCorreo] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [token, setToken] = useState("");
+    const reCaptcha = useRef();
+    const [success, setSuccess] = useState(null);
 
     const [nombreError, setNombreError] = useState("");
     const [apellidosError, setApellidosError] = useState("");
@@ -25,15 +29,7 @@ const RegisterMember = () => {
     const [passwordConfirmationError, setPasswordConfirmationError] = useState("");
 
 
-    const getFormattedDate = () => {
-        const date = new Date();
-        const dd = String(date.getDate()).padStart(2, '0');
-        var mm = String(date.getMonth() + 1).padStart(2, '0');
-        var yyyy = date.getFullYear();
-        const formatted = yyyy + '-' + mm + '-' + dd;
-        return formatted
-    }
-    const formatted = getFormattedDate;
+    const formatted = GetFormattedDate;
     const [fecha, setFecha] = useState(formatted);
     const [LogInStatus, setLogInStatus] = useState("");
     const [activo, setActivo] = useState(false);
@@ -47,7 +43,7 @@ const RegisterMember = () => {
             puestoError: false,
             correoError: false,
             passwordError: false,
-            passwordConfirmationError: false,
+            passwordConfirmationError: false
 
         }
         if (nombre.length < 2) {
@@ -134,6 +130,8 @@ const RegisterMember = () => {
                 }).then(() => {
                     console.log(fecha)
                     console.log("Frontend and backend connected.")
+                    setSuccess(true)
+                    ShowAlert(success, 'integrante')
                     document.getElementById("integrante-form").reset();
 
                 })
@@ -209,6 +207,14 @@ const RegisterMember = () => {
 
                     }}
                 />
+                <ReCAPTCHA className="recaptcha-Spacing"
+                    sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
+                    onChange={token => {
+                        setToken(token)
+                    }}
+                    onExpired={e => setToken("")}
+                    ref={reCaptcha}
+                ></ReCAPTCHA>
                 <Button variant="outlined" onClick={registrarIntegrante}>Registrar integrante</Button>
             </form>
 

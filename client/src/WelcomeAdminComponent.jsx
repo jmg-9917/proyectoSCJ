@@ -2,12 +2,28 @@ import './App.css';
 import {useState} from 'react';
 import Axios from 'axios'
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {Snackbar, Alert, TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
-
+import {Link, useHistory} from 'react-router-dom';
 const WelcomeAdminComponent = () => {
+    const history = useHistory();
+    const [nombre, setNombre] = useState("");
+    const [apellidos, setApellidos] = useState("");
+    function userFound() {
+        Axios.get("http://localhost:3002/login").then((response) => {
+            if (response.data.LoggedIn === false || response.data.user.length === 0) {
+                history.push('/login')
+                window.location.reload()
+            }
+            else {
+                console.log(response.data)
+                setNombre(response.data.user[0][0].nombre)
+                setApellidos(response.data.user[0][0].apellidos)
+            }
+        })
+    }
+    userFound()
     return (
         <div>
+            <h2>{nombre}</h2>
             <Link to="/registerMember">
                 <li>Registrar Miembro</li>
             </Link>

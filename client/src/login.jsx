@@ -1,9 +1,9 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+import {TextField, Button} from '@material-ui/core';
 import validator from 'validator';
 import ReCAPTCHA from 'react-google-recaptcha';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -70,13 +70,15 @@ const LogIn = () => {
                     if (response.data.length === 0) {
                         console.log(response.data)
                         setLogInStatus("No coincide.")
-
                     }
                     else {
                         console.log("Frontend and backend connected.")
-                        history.push('/dashboard')
-
-
+                        if (response.data[0].nombre === 'admin') {
+                            history.push('/registerDashboard')
+                        }
+                        else {
+                            history.push('/dashboard')
+                        }
                     }
                 })
 
@@ -93,11 +95,6 @@ const LogIn = () => {
 
     }
 
-    useEffect(() => {
-        Axios.get("http://localhost:3002/login").then((response) => {
-            console.log(response.data)
-        })
-    })
 
 
 

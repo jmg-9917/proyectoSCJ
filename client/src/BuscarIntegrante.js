@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { TextField, Button } from '@material-ui/core';
+import {TextField, Button} from '@material-ui/core';
+import Card from 'react-bootstrap/Card';
 function BuscarIntegrante() {
 
 
@@ -11,15 +12,17 @@ function BuscarIntegrante() {
 
     const [integrantes, setIntegrantes] = useState([]);
 
-    const handleSearch = () => {
-        Axios.get('http://localhost:3002/buscarIntegrantes',
-            {
-                nombre: nombre
-            })
+    useEffect(() => {
+        let isMounted = true;
+        Axios.get("http://localhost:3002/integrantes")
             .then((response) => {
-                setIntegrantes(response.data)
-            })
-    }
+                if (isMounted) {
+                    setIntegrantes(response.data)
+                }
+            }, [])
+        return () => {isMounted = false};
+
+    })
 
 
     return (
@@ -31,16 +34,30 @@ function BuscarIntegrante() {
                     type="text"
                     onChange={(event) => {
                         setNombre(event.target.value)
+                        setApellidos(event.target.value)
                     }}
                 />
-                <Button onClick={handleSearch}>Buscar</Button>
             </div>
-            {integrantes.map((val, key) => {
+            {integrantes.filter((val) => {
+                if (nombre === '' || apellidos === '') {
+                    return val
+                }
+                else if (val.nombre.toLowerCase().includes(nombre.toLowerCase()) || val.apellidos.toLowerCase().includes(apellidos.toLowerCase())) {
+                    return val
+                }
+            }).map((val, key) => {
 
                 return (
                     <div>
-                        <h1>val.nombre</h1>
-                        <h1>val.apellidos</h1>
+                        <Card key={val.id} className="Card-appearence" >
+                            <Card.Body>
+                                <Card.Title>{val.nombre}</Card.Title>
+                                <Card.Text>{val.apellidos}</Card.Text>
+                                <Card.Text>{val.puesto}</Card.Text>
+                                <Button>Ver mas informacion del miembro</Button>
+                            </Card.Body>
+                        </Card>
+
                     </div>
                 )
             })}

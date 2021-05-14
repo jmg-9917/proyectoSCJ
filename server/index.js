@@ -16,7 +16,7 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     key: "userId",
@@ -24,7 +24,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: 60 * 60 * 24
+        expires: 60 * 60 * 24 * 24
     }
 }))
 
@@ -35,22 +35,6 @@ const db = mysql.createConnection({
     database: "SCJDatabase"
 })
 
-app.get('/evento', (req, res) => {
-    const nombreEvento = req.body.nombreEvento
-    const ciudad = req.body.ciudad
-    db.query("SELECT * FROM Eventos WHERE nombreEvento = ? AND ciudad =?",
-        [nombreEvento, ciudad], (err, result) => {
-            if (err) {
-                res.send({err: err})
-            }
-            if (result) {
-                res.send(result)
-            }
-            else {
-                res.send({message: "Wrong combination"})
-            }
-        })
-})
 
 app.get('/eventos', (req, res) => {
     db.query("SELECT * FROM Eventos", (err, result) => {
@@ -63,19 +47,16 @@ app.get('/eventos', (req, res) => {
     })
 })
 
-app.get('/buscarIntegrantes', async (req, res) => {
-    const nombre = req.body.nombre;
-    const apellidos = req.body.apellidos;
-    db.query("SELECT nombre, apellidos FROM Integrante WHERE nombre like '%?%'", [
-        nombre
-    ], (err, result) => {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            res.send(result)
-        }
-    })
+app.get('/integrantes', async (req, res) => {
+    db.query("SELECT * FROM Integrante",
+        (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                res.send(result)
+            }
+        })
 })
 
 
@@ -88,7 +69,7 @@ app.post('/reCaptcha', async (req, res, next) => {
         const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret + "&response=" + req.body.token
 
         const response = await axios.post(url)
-        const {success} = response.data
+        const { success } = response.data
 
         if (success) {
             console.log(success)
@@ -112,7 +93,7 @@ app.post('/createJunta', async (req, res) => {
     db.query("INSERT INTO Juntas (tipo,descripcion,participantes) VALUES(?,?,?)",
         [tipo, descripcion, partipantes],
         (err, result) => {
-            if (err) {console.log(err)}
+            if (err) { console.log(err) }
             else {
                 res.send(result)
 
@@ -135,8 +116,8 @@ app.post('/create', async (req, res) => {
         [nombre, apellidos, telefono, correo, password, fecha, puesto, activo],
         (err, result) => {
 
-            if (err) {console.log(err)}
-            else {res.send("Values inserted")}
+            if (err) { console.log(err) }
+            else { res.send("Values inserted") }
 
         }
     );
@@ -152,11 +133,11 @@ app.post('/createEvent', async (req, res) => {
     //const hashedPassword = await bcrypt.hash(password, 10)
     //console.log(hashedPassword)
     db.query('INSERT INTO Eventos (nombreEvento,ciudad,nacional,descripcion) VALUES (?,?,?,?)',
-        [nombre, ciudad, nacional,descripcion],
+        [nombre, ciudad, nacional, descripcion],
         (err, result) => {
 
-            if (err) {console.log(err)}
-            else {res.send("Values inserted")}
+            if (err) { console.log(err) }
+            else { res.send("Values inserted") }
 
         }
     );
@@ -168,10 +149,10 @@ app.post('/createEvent', async (req, res) => {
 app.get('/login', (req, res) => {
     if (req.session.user) {
 
-        res.send({loggedIn: true, user: req.session.user});
+        res.send({ loggedIn: true, user: [req.session.user] });
     }
     else {
-        res.send({loggedIn: false});
+        res.send({ loggedIn: false, user: [] });
     }
 })
 
@@ -183,7 +164,7 @@ app.post('/login', async (req, res) => {
         db.query("SELECT * FROM Integrante WHERE correo_electronico = ? AND contraseña =? ",
             [correo, password], (err, result) => {
                 if (err) {
-                    res.send({err: err})
+                    res.send({ err: err })
                 }
                 if (result) {
                     req.session.user = result;
@@ -191,7 +172,7 @@ app.post('/login', async (req, res) => {
                     res.send(result)
                 }
                 else {
-                    res.send({message: "Wrong combination"})
+                    res.send({ message: "Wrong combination" })
                 }
             })
 

@@ -1,24 +1,20 @@
 
 import './App.css';
-import { useState, useRef } from 'react';
+import {useState, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { TextField, Button } from '@material-ui/core'
+import {TextField, Button} from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
-import ShowAlert from './Flash-message-component';
 const RegisterMeeting = () => {
     const [tipo, setTipo] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [token, setToken] = useState("");
     const [error, setError] = useState("");
     const reCaptcha = useRef();
-    const [success, setSuccess] = useState(null);
 
     const registrarJunta = () => {
         if (!token) {
             setError("Verify captcha")
-            setSuccess(false);
-            ShowAlert(success, 'junta')
             return;
         }
         else {
@@ -36,8 +32,6 @@ const RegisterMeeting = () => {
                     descripcion: descripcion,
                 }).then(() => {
                     console.log("Junta registrada.")
-                    setSuccess(true);
-                    ShowAlert(success, 'junta')
                 })
                     .catch(e => {
                         setError(e)
@@ -49,9 +43,11 @@ const RegisterMeeting = () => {
             })
 
         };
+    }
 
-        return (
-            <div>
+    return (
+        <div>
+            <form id="integrante-form" className="information">
                 <h2>Registrar junta</h2>
                 <label>Tipo de junta:</label>
                 <TextField
@@ -77,8 +73,8 @@ const RegisterMeeting = () => {
                     ref={reCaptcha}
                 ></ReCAPTCHA>
                 <Button variant="outlined" onClick={registrarJunta}>Registrar junta</Button>
-            </div>
-        )
-    }
+            </form>
+        </div>
+    )
 }
 export default RegisterMeeting;

@@ -20,7 +20,7 @@ function MostrarEventos() {
     return (
         <div className="eventos">
             <h1>Mostrar todos los eventos</h1>
-            {eventos.map((val) => {
+            {eventos.map((val, key) => {
                 var nacionalText = ""
                 if (val.nacional === 1) {
                     nacionalText = "Nacional"
@@ -29,7 +29,7 @@ function MostrarEventos() {
                 else {nacionalText = "Local"}
                 return (
                     <>
-                        <Card className="Card-appearence" >
+                        <Card key={key} className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.nombreEvento}</Card.Title>
                                 <Card.Text>{val.ciudad}</Card.Text>

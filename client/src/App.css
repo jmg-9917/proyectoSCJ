@@ -6,14 +6,31 @@ App {
 .opening-navbar-location{
     z-index: auto;
 }
-.opening-mainpage-location{
-    z-index: auto;
+.opening-mainpage-location h1{
+    align-content:center;
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+.Carousel{
+    padding-top: 1em;
+    padding: 1em;
+    width: 100%;
+    display: flex;
+}
+
+.center-slide-text{
+   text-align: center; 
+}
+
+
+.radio-display{
+    display: flex-direction;
+}
+
 
 header{
     position: fixed;
@@ -24,6 +41,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 1em;
+    padding-top: 0em;
 }
 body{
     padding-top: 3rem;
@@ -34,7 +52,7 @@ body{
 
 nav{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     min-height: 10vh;
     background: rgb(73,79,82);

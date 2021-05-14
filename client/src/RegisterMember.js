@@ -1,9 +1,9 @@
 
 import './App.css';
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import Axios from 'axios'
 import React from 'react';
-import {TextField, Button} from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 import validator from 'validator';
 import GetFormattedDate from './GetFormattedDate';
 import ReCAPTCHA from 'react-google-recaptcha';

@@ -1,64 +1,63 @@
-import React, {useState} from 'react';
+import React from 'react';
 import GenerateAlert from './GenerateAlert';
 function ShowAlert(success, typeOfOp) {
-    const [message, setMessage] = useState('');
-    const [title, setTitle] = useState('');
     if (success) {
         switch (typeOfOp) {
             case 'evento':
-                setMessage('Se registro correctamente')
-                setTitle('Evento registrado')
-                GenerateAlert(title, message, true)
-                break;
-            case 'integrante':
-                setMessage('Se registro correctamente')
-                setTitle('Integrante registrado')
-                GenerateAlert(title, message, true)
-                break;
-            case 'junta':
-                setMessage('Se registro correctamente')
-                setTitle('Junta registrada')
-                GenerateAlert(title, message, true)
-                break;
-            case 'login':
-                setMessage('Ingreso correctamente')
-                setTitle('Bienvenido')
-                GenerateAlert(title, message, true)
+                return (
+                    GenerateAlert('Evento registrado', 'Se registro correctamente', true)
 
-                break;
+                )
+            case 'integrante':
+                return (
+                    GenerateAlert('Integrante registrado', 'Se registro correctamente', true)
+                )
+            case 'junta':
+                return (
+                    GenerateAlert('Junta registrada', 'Se registro correctamente', true)
+
+                )
+            case 'login':
+                return (
+                    GenerateAlert('Bienvenido', 'Ingreso correctamente', true)
+
+                )
+
             default:
-                setMessage('Algo salio mal')
-                setTitle('Error presente')
-                GenerateAlert(title, message, false)
+                return (
+                    GenerateAlert('Error presente', 'Algo salio mal', true)
+
+                )
         }
     }
     else {
         switch (typeOfOp) {
             case 'evento':
-                setMessage('No se pudo registro correctamente')
-                setTitle('Evento no registrado')
-                GenerateAlert(title, message, false)
-                break;
-            case 'integrante':
-                setMessage('No se registro correctamente')
-                setTitle('Integrante no registrado')
-                GenerateAlert(title, message, false)
-                break;
-            case 'junta':
-                setMessage('No se registro correctamente')
-                setTitle('Junta no registrada')
-                GenerateAlert(title, message, false)
-                break;
-            case 'login':
-                setMessage('No pudo ingresar. Intentelo de nuevo.')
-                setTitle('Intento de log in fallido.')
-                GenerateAlert(title, message, false)
+                return (
+                    GenerateAlert('Evento no registrado', 'No se pudo registro correctamente', false)
 
-                break;
+                )
+            case 'integrante':
+                return (
+                    GenerateAlert('No se registro correctamente', 'Integrante no registrado', false)
+
+                )
+            case 'junta':
+                return (
+                    GenerateAlert('Junta no registrada', 'No se registro correctamente', false)
+
+                )
+            case 'login':
+                return (
+                    GenerateAlert('Intento de log in fallido.', 'No pudo ingresar. Intentelo de nuevo.', false)
+
+                )
+
             default:
-                setMessage('Algo salio mal')
-                setTitle('Error presente')
-                GenerateAlert(title, message, false)
+                return (
+                    GenerateAlert('Error presente', 'Algo salio mal', false)
+
+                )
         }
 
     }

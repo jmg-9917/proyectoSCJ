@@ -1,9 +1,9 @@
 
 import './App.css';
-import { useState, useRef } from 'react';
+import {useState, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import {TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
 const RegisterEvent = () => {
@@ -68,53 +68,52 @@ const RegisterEvent = () => {
 
     return (
         <div>
-            <h2>Registrar evento</h2>
-            <label>Nombre del evento:</label>
-            <TextField
-                type="text"
-                label="Nombre del evento"
-                onChange={(event) => {
-                    setNombreEvento(event.target.value)
+            <form id="integrante-form" className="information">
+                <h2>Registrar evento</h2>
+                <label>Nombre del evento:</label>
+                <TextField
+                    type="text"
+                    onChange={(event) => {
+                        setNombreEvento(event.target.value)
 
-                }}
-            />
-            <label>Ciudad</label>
-            <TextField
-                type="text"
-                label="Ciudad"
-                onChange={(event) => {
-                    setCiudad(event.target.value)
+                    }}
+                />
+                <label>Ciudad</label>
+                <TextField
+                    type="text"
+                    onChange={(event) => {
+                        setCiudad(event.target.value)
 
-                }}
-            />
-            <label>Es nacional?</label>
-            <RadioGroup value={radioValue} onChange={
-                (event) => {
-                    setRadioValue(event.target.value)
-                }
-            }>
-                <FormControlLabel value="si" control={<Radio />} label="Si" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-            </RadioGroup>
-            <TextField
-                type="text"
-                label="Descripcion"
-                multiline
-                rowsMax={4}
-                onChange={(event) => {
-                    setDescripcion(event.target.value)
-                }
-                }
-            ></TextField>
-            <ReCAPTCHA className="recaptcha-Spacing"
-                sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
-                onChange={token => {
-                    setToken(token)
-                }}
-                onExpired={e => setToken("")}
-                ref={reCaptcha}
-            ></ReCAPTCHA>
-            <Button variant="outlined" onClick={registrarEvento}>Registrar evento</Button>
+                    }}
+                />
+                <label>Es nacional?</label>
+                <RadioGroup className="radio-display" value={radioValue} onChange={
+                    (event) => {
+                        setRadioValue(event.target.value)
+                    }
+                }>
+                    <FormControlLabel value="si" control={<Radio />} label="Si" />
+                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+                <TextField
+                    type="text"
+                    multiline
+                    rowsMax={4}
+                    onChange={(event) => {
+                        setDescripcion(event.target.value)
+                    }
+                    }
+                ></TextField>
+                <ReCAPTCHA className="recaptcha-Spacing"
+                    sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
+                    onChange={token => {
+                        setToken(token)
+                    }}
+                    onExpired={e => setToken("")}
+                    ref={reCaptcha}
+                ></ReCAPTCHA>
+                <Button variant="outlined" onClick={registrarEvento}>Registrar evento</Button>
+            </form>
         </div>
 
     )

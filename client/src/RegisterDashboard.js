@@ -1,12 +1,10 @@
 import './App.css';
-import {Link, Redirect, BrowserRouter as Router, Route} from 'react-router-dom';
+import {Link, BrowserRouter as Router, Route} from 'react-router-dom';
 import WelcomeAdminComponent from './WelcomeAdminComponent';
 import RegisterMember from './RegisterMember';
 import RegisterEvent from './RegisterEvent';
 import RegisterMeeting from './RegisterMeeting';
 import RegisterLabReport from './RegisterLabReport';
-import RegisterMaterials from './RegisterMaterials';
-import RegisterVisits from './RegisterVisits';
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
 import {Navbar, Nav} from 'react-bootstrap';
@@ -26,7 +24,7 @@ function RegisterDashboard() {
             <header>
                 <div className="opening-navbar-location">
                     <Navbar className="navbar-spacing" bg="light" expand="lg">
-                        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                        <Navbar.Brand href="#home">SCJ</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav >
@@ -47,8 +45,6 @@ function RegisterDashboard() {
                     <Route path="/registerEvent" component={RegisterEvent} />
                     <Route path="/registerMeeting" component={RegisterMeeting} />
                     <Route path="/registerLabReport" component={RegisterLabReport} />
-                    <Route path="/registerMaterials" component={RegisterMaterials} />
-                    <Route path="/registerVisits" component={RegisterVisits} />
                 </Router>
             </body>
         </div>

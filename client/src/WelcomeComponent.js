@@ -32,6 +32,13 @@ function WelcomeComponent() {
             <Link to="/buscarEvento">
                 <li>Buscar evento</li>
             </Link>
+            <Link to="/buscarJunta">
+                <li>Buscar junta</li>
+            </Link>
+            <Link to="/buscarPractica">
+                <li>Buscar practica</li>
+            </Link>
+
             <Link to="/mostrarEventos">
                 <li>Mostrar eventos</li>
             </Link>

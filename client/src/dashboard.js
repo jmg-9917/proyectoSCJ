@@ -4,6 +4,8 @@ import {Redirect, BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Axios from 'axios';
 import BuscarEvento from './BuscarEvento';
 import BuscarIntegrante from './BuscarIntegrante';
+import BuscarPractica from './BuscarPractica';
+import BuscarJunta from './BuscarJunta';
 import MostrarEventos from './MostrarEventos';
 import WelcomeComponent from './WelcomeComponent';
 function Dashboard() {
@@ -28,7 +30,8 @@ function Dashboard() {
                 <Route path="/buscarIntegrante" component={BuscarIntegrante} />
                 <Route path="/buscarEvento" component={BuscarEvento} />
                 <Route path="/mostrarEventos" component={MostrarEventos} />
-
+                <Route path="/buscarPractica" component={BuscarPractica} />
+                <Route path="/buscarJunta" component={BuscarJunta} />
             </Router>
 
         </div>

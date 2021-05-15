@@ -1,12 +1,15 @@
 import './App.css';
-import { Link, Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
+import {Link, Redirect, BrowserRouter as Router, Route} from 'react-router-dom';
 import WelcomeAdminComponent from './WelcomeAdminComponent';
 import RegisterMember from './RegisterMember';
 import RegisterEvent from './RegisterEvent';
 import RegisterMeeting from './RegisterMeeting';
+import RegisterLabReport from './RegisterLabReport';
+import RegisterMaterials from './RegisterMaterials';
+import RegisterVisits from './RegisterVisits';
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
-import { Navbar, Nav } from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
 function RegisterDashboard() {
     const handleLogOut = () => {
         Axios.get("http://localhost:3002/login").then((response) => {
@@ -43,6 +46,9 @@ function RegisterDashboard() {
                     <Route path="/registerMember" component={RegisterMember} />
                     <Route path="/registerEvent" component={RegisterEvent} />
                     <Route path="/registerMeeting" component={RegisterMeeting} />
+                    <Route path="/registerLabReport" component={RegisterLabReport} />
+                    <Route path="/registerMaterials" component={RegisterMaterials} />
+                    <Route path="/registerVisits" component={RegisterVisits} />
                 </Router>
             </body>
         </div>

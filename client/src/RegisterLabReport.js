@@ -1,9 +1,9 @@
 
 import './App.css';
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import Axios from 'axios'
 import React from 'react';
-import {TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
+import { TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
 const RegisterPractica = () => {
     const [nombre, setNombre] = useState("");
@@ -27,7 +27,7 @@ const RegisterPractica = () => {
             }).then(() => {
                 reCaptcha.current.reset();
                 setToken("");
-                alert("Sign in success");
+                alert("Practica registrada");
 
                 Axios.post('http://localhost:3002/createLabReport', {
                     nombre: nombre,
@@ -35,7 +35,7 @@ const RegisterPractica = () => {
                     categoria: categoria
                 }).then(() => {
                     console.log("Frontend and backend connected.")
-                    alert()
+                    alert("Practica registrada correctamente.")
                 })
 
             })
@@ -70,9 +70,11 @@ const RegisterPractica = () => {
 
                     }}
                 />
+                <label>Descripcion de la practica</label>
                 <TextField
                     type="text"
                     multiline
+                    fullWidth
                     rowsMax={4}
                     onChange={(event) => {
                         setDescripcion(event.target.value)

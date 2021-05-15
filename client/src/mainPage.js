@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from '@material-ui/core';
-import { Navbar, Nav, Carousel } from 'react-bootstrap';
+import {Button} from '@material-ui/core';
+import {Navbar, Nav, Carousel} from 'react-bootstrap';
 import './App.css';
 const Presentation = () => {
     let history = useHistory()
@@ -15,7 +15,7 @@ const Presentation = () => {
             <header>
                 <div className="opening-navbar-location">
                     <Navbar bg="light" expand="lg">
-                        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                        <Navbar.Brand href="#home">SCJ Data</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav >

@@ -98,6 +98,7 @@ const RegisterEvent = () => {
                 <TextField
                     type="text"
                     multiline
+                    fullWidth
                     rowsMax={4}
                     onChange={(event) => {
                         setDescripcion(event.target.value)

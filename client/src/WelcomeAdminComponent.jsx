@@ -1,8 +1,8 @@
 import './App.css';
-import { useState } from 'react';
+import {useState} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 const WelcomeAdminComponent = () => {
     const history = useHistory();
     const [nombre, setNombre] = useState("");
@@ -39,7 +39,7 @@ const WelcomeAdminComponent = () => {
             <Link to="/registerMaterials">
                 <li>Registra materiales</li>
             </Link>
-            <Link to="/registerVisits">
+            <Link to="/registerVisit">
                 <li>Registra una visita</li>
             </Link>
         </div>

@@ -22,9 +22,8 @@ app.use(session({
     key: "userId",
     secret: "suscribed",
     resave: false,
-    saveUninitialized: false,
     cookie: {
-        expires: 60 * 60 * 24 * 24
+        maxAge: 60 * 60 * 24 * 24
     }
 }))
 
@@ -201,10 +200,10 @@ app.post('/createEvent', async (req, res) => {
 app.get('/login', (req, res) => {
     if (req.session.user) {
 
-        res.send({ loggedIn: true, user: [req.session.user] });
+        res.send({ LoggedIn: true, user: [req.session.user] });
     }
     else {
-        res.send({ loggedIn: false, user: [] });
+        res.send({ LoggedIn: false, user: [] });
     }
 })
 

@@ -1,8 +1,8 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import {TextField} from '@material-ui/core';
-import {Card, Button} from 'react-bootstrap';
+import { TextField } from '@material-ui/core';
+import { Card, Button } from 'react-bootstrap';
 function BuscarJunta() {
 
 
@@ -20,14 +20,14 @@ function BuscarJunta() {
                     setJuntas(response.data)
                 }
             }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
 
 
     return (
         <div>
-            <h1>Buscar integrante</h1>
+            <h1>Buscar junta</h1>
             <div className="information">
                 <label>Nombre:</label>
                 <TextField
@@ -48,8 +48,8 @@ function BuscarJunta() {
             }).map((val, key) => {
 
                 return (
-                    <div>
-                        <Card key={val.id} className="Card-appearence" >
+                    <div key={key}>
+                        <Card className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.tipo}</Card.Title>
                                 <Card.Text>{val.descripcion}</Card.Text>

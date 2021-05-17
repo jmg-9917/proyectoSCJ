@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import App from './App.css';
 import Card from 'react-bootstrap/Card';
@@ -14,7 +14,7 @@ function MostrarEventos() {
                     setEventos(response.data)
                 }
             }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
     return (
@@ -26,10 +26,10 @@ function MostrarEventos() {
                     nacionalText = "Nacional"
 
                 }
-                else {nacionalText = "Local"}
+                else { nacionalText = "Local" }
                 return (
                     <>
-                        <Card key={key} className="Card-appearence" >
+                        <Card key={val.noEvento} className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.nombreEvento}</Card.Title>
                                 <Card.Text>{val.ciudad}</Card.Text>

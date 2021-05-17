@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {TextField, Button} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import Axios from 'axios'
 function BuscarEvento() {
     const [nombreEvento, setNombreEvento] = useState('');

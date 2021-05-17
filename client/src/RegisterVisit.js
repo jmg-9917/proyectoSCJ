@@ -5,7 +5,7 @@ import Axios from 'axios'
 import React from 'react';
 import {TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
-const RegisterPractica = () => {
+const RegisterVisita = () => {
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState('');
     const [categoria, setCat] = useState('');
@@ -56,6 +56,7 @@ const RegisterPractica = () => {
                 <h2>Registrar practica</h2>
                 <label>Nombre de la practica:</label>
                 <TextField
+                    id="practica-nombre-textfield"
                     type="text"
                     onChange={(event) => {
                         setNombre(event.target.value)
@@ -64,6 +65,7 @@ const RegisterPractica = () => {
                 />
                 <label>Categoria</label>
                 <TextField
+                    id="practica-categoria-textfield"
                     type="text"
                     onChange={(event) => {
                         setCat(event.target.value)
@@ -72,6 +74,7 @@ const RegisterPractica = () => {
                 />
                 <label>Descripcion de la practica</label>
                 <TextField
+                    id="practica-descripcion-textfield"
                     type="text"
                     multiline
                     fullWidth
@@ -95,5 +98,5 @@ const RegisterPractica = () => {
 
     )
 }
-export default RegisterPractica;
+export default RegisterVisita;
 

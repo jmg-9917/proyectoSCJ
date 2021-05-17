@@ -50,7 +50,7 @@ function BuscarPractica() {
 
                 return (
                     <div>
-                        <Card key={val.id} className="Card-appearence" >
+                        <Card key={key} className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.nombre}</Card.Title>
                                 <Card.Text>{val.categoria}</Card.Text>

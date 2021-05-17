@@ -21,7 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     key: "userId",
     secret: "suscribed",
-    resave: false,
+    resave: true,
+    saveUninitialized: false,
     cookie: {
         maxAge: 60 * 60 * 24 * 24
     }
@@ -237,7 +238,24 @@ app.post('/login', async (req, res) => {
 
 });
 
+app.get("/dashboard", (req, res) => {
+    if (req.session.user) {
+        res.send(req.session.user)
+    }
+    else {
+        res.redirect("/login")
+    }
+})
 
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return console.log(err);
+        }
+        res.redirect('/');
+    });
+
+});
 app.listen(3002, () => {
     console.log("Server started on port 3002.");
 });

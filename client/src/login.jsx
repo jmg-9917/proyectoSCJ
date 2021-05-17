@@ -1,9 +1,9 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+import {TextField, Button} from '@material-ui/core';
 import validator from 'validator';
 import ReCAPTCHA from 'react-google-recaptcha';
 import 'bootstrap/dist/css/bootstrap.min.css';

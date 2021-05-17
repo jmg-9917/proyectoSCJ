@@ -6,7 +6,8 @@ import { useHistory, Link, Redirect } from 'react-router-dom';
 function WelcomeComponent() {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");
-
+    const history = useHistory()
+    Axios.defaults.withCredentials = true
     function UserFound() {
         Axios.get("http://localhost:3002/login").then((response) => {
             if (response.data.LoggedIn) {
@@ -14,8 +15,9 @@ function WelcomeComponent() {
                 setNombre(response.data.user[0][0].nombre)
                 setApellidos(response.data.user[0][0].apellidos)
             }
-            else {
-                console.log(response.data)
+            if (response.data.LoggedIn === false || response.data.user.length === 0) {
+                history.push('/login')
+                window.location.reload()
             }
         })
     }

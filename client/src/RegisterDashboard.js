@@ -1,5 +1,5 @@
 import './App.css';
-import { Link, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {Link, BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import WelcomeAdminComponent from './WelcomeAdminComponent';
 import RegisterMember from './RegisterMember';
 import RegisterEvent from './RegisterEvent';
@@ -8,15 +8,11 @@ import RegisterLabReport from './RegisterLabReport';
 import RegisterVisita from './RegisterVisit';
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
-import { Navbar, Nav } from 'react-bootstrap';
-function RegisterDashboard({ authorized }) {
-    if (!authorized) {
-        return <Redirect to="/login" />
-    }
+import {Navbar, Nav} from 'react-bootstrap';
+function RegisterDashboard() {
+    Axios.defaults.withCredentials = true
     const handleLogOut = () => {
-        Axios.get("http://localhost:3002/login").then((response) => {
-            response.data.loggedIn = false;
-            response.data.user = [];
+        Axios.get("http://localhost:3002/logout").then((response) => {
             console.log(response.data)
 
         })

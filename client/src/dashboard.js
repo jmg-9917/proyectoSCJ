@@ -12,14 +12,14 @@ import UserProfileView from './UserProfileView';
 import { Button } from 'react-bootstrap';
 function Dashboard() {
     const handleLogOut = () => {
-        Axios.get("http://localhost:3002/login").then((response) => {
-            response.data.loggedIn = false;
-            response.data.user = [];
+        Axios.defaults.withCredentials = true
+        Axios.get("http://localhost:3002/logout").then((response) => {
             console.log(response.data)
 
         })
 
     }
+
     return (
         <div>
             <Link to="/login">
@@ -40,12 +40,7 @@ function Dashboard() {
 
     )
 
+
 }
-
-
-
-
-
-
 export default Dashboard;
 

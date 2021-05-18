@@ -23,7 +23,7 @@ const WelcomeAdminComponent = () => {
                 setNombre(response.data.user[0][0].nombre)
                 setApellidos(response.data.user[0][0].apellidos)
             }
-        })
+        });
     }
     userFound()
     return (

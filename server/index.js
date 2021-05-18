@@ -237,6 +237,32 @@ app.post('/login', async (req, res) => {
 
 
 });
+app.post('/getUser', async (req, res) => {
+    try {
+        const idIntegrante = req.body.id
+        db.query("SELECT * FROM Integrantes WHERE idIntegrante = ? ",
+            [idIntegrante], (err, result) => {
+                if (err) {
+                    res.send({ err: err })
+                }
+                if (result) {
+                    console.log(req.session.user);
+                    res.send(result)
+                }
+                else {
+                    res.send({ message: "Wrong combination" })
+                }
+            })
+
+    }
+
+    catch (e) {
+        console.log(e);
+        res.status(500).send('error ocurred');
+    }
+
+
+});
 
 app.get("/dashboard", (req, res) => {
     if (req.session.user) {

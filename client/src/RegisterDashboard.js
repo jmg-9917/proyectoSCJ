@@ -1,5 +1,5 @@
 import './App.css';
-import {Link, BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import { Link, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import WelcomeAdminComponent from './WelcomeAdminComponent';
 import RegisterMember from './RegisterMember';
 import RegisterEvent from './RegisterEvent';
@@ -8,7 +8,7 @@ import RegisterLabReport from './RegisterLabReport';
 import RegisterVisita from './RegisterVisit';
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
-import {Navbar, Nav} from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 function RegisterDashboard() {
     Axios.defaults.withCredentials = true
     const handleLogOut = () => {
@@ -24,12 +24,12 @@ function RegisterDashboard() {
             <header>
                 <div className="opening-navbar-location">
                     <Navbar className="navbar-spacing" bg="light" expand="lg">
-                        <Navbar.Brand href="#home">SCJ</Navbar.Brand>
+                        <Navbar.Brand href="/registerDashboard">SCJ</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav >
-                                <Nav.Link href="dashboard">Home</Nav.Link>
-                                <Nav.Link href="#link">Link</Nav.Link>
+                                <Nav.Link href="/dashboard">Home</Nav.Link>
+                                <Nav.Link href="/registerDashboard">Admin Dashboard</Nav.Link>
                                 <Link to="/login">
                                     <Button onClick={handleLogOut}>Log Out</Button>
                                 </Link>

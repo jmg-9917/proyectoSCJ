@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 function BuscarIntegrante() {
@@ -9,18 +9,14 @@ function BuscarIntegrante() {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");
     const [texto, setTexto] = useState("");
-
-
+    const [id, setId] = useState('')
     const [integrantes, setIntegrantes] = useState([]);
-
     useEffect(() => {
-        let isMounted = true;
-        Axios.get("http://localhost:3002/integrantes")
-            .then((response) => {
-                if (isMounted) {
-                    setIntegrantes(response.data)
-                }
-            }, [])
+        let isMounted = true; Axios.get("http://localhost:3002/integrantes").then((response) => {
+            if (isMounted) {
+                setIntegrantes(response.data)
+            }
+        }, [])
         return () => { isMounted = false };
 
     })
@@ -55,8 +51,8 @@ function BuscarIntegrante() {
                                 <Card.Title>{val.nombre}</Card.Title>
                                 <Card.Text>{val.apellidos}</Card.Text>
                                 <Card.Text>{val.puesto}</Card.Text>
-                                <Link to="/verInfoIntegrante">
-                                    <Button>Ver mas informacion del miembro</Button>
+                                <Link to="/dashboard/verInfoIntegrante">
+                                    <Button >Ver mas informacion del miembro</Button>
                                 </Link>
                             </Card.Body>
                         </Card>

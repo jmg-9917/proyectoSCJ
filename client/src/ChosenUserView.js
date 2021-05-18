@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-function UserProfileView() {
+function ChosenUserView(props) {
     const history = useHistory();
     const [nombre, setNombre] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -10,26 +10,26 @@ function UserProfileView() {
     const [puesto, setPuesto] = useState('');
     const [telefono, setTelefono] = useState('')
     const [fechaInscripcion, setFecha] = useState('');
-    function UserInfo() {
-        Axios.defaults.withCredentials = true
-        Axios.get("http://localhost:3002/login").then((response) => {
-            if (response.data.LoggedIn) {
-                setNombre(response.data.user[0][0].nombre)
-                setApellidos(response.data.user[0][0].apellidos)
-                setCorreo(response.data.user[0][0].correo_electronico)
-                setPuesto(response.data.user[0][0].puesto)
-                setTelefono(response.data.user[0][0].telefono)
-                setFecha(response.data.user[0][0].fechaInscripcion)
+    const [userId, setUserId] = useState('');
 
-            }
-
-            else {
-
-                history.push("/dashboard");
-            }
-        })
+    if (props.location.state.userId) {
+        setUserId(props.location.state.userId)
     }
-    UserInfo()
+    else {
+        history.push('/dashboard');
+    }
+    function getChosenUserInfo() {
+        Axios.defaults.withCredententials = true
+
+        Axios.post('http:/localhost:3002/getUser', {
+            id: userId
+        }).then((response) => {
+            console.log(response.data)
+        })
+
+    }
+    getChosenUserInfo()
+
     return (
         <>
             <Container>
@@ -57,4 +57,4 @@ function UserProfileView() {
     )
 }
 
-export default UserProfileView;
+export default ChosenUserView;

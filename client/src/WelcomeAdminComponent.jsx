@@ -1,12 +1,9 @@
 import './App.css';
-import { useState } from 'react';
 import Axios from 'axios'
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 const WelcomeAdminComponent = () => {
     const history = useHistory();
-    const [nombre, setNombre] = useState("");
-    const [apellidos, setApellidos] = useState("");
     function userFound() {
         Axios.defaults.withCredentials = true
         Axios.get("http://localhost:3002/login").then((response) => {
@@ -20,31 +17,32 @@ const WelcomeAdminComponent = () => {
                     window.location.reload()
                 }
                 console.log(response.data)
-                setNombre(response.data.user[0][0].nombre)
-                setApellidos(response.data.user[0][0].apellidos)
             }
         });
     }
     userFound()
     return (
         <div>
-            <h2>{nombre}</h2>
-            <Link to="/registerMember">
+            <Link to="/registerDashboard/registerMember">
                 <li>Registrar Miembro</li>
             </Link>
-            <Link to="/registerMeeting">
+            <Link to="/registerDashboard/alterItems">
+                <li>Altera algo</li>
+            </Link>
+
+            <Link to="/registerDashboard/registerMeeting">
                 <li>Registrar una junta</li>
             </Link>
-            <Link to="/registerEvent">
+            <Link to="/registerDashboard/registerEvent">
                 <li>Registrar un evento</li>
             </Link>
-            <Link to="/registerLabReport">
+            <Link to="/registerDashboard/registerLabReport">
                 <li>Registra una practica</li>
             </Link>
-            <Link to="/registerMaterials">
+            <Link to="/registerDashboard/registerMaterials">
                 <li>Registra materiales</li>
             </Link>
-            <Link to="/registerVisit">
+            <Link to="/registerDashboard/registerVisit">
                 <li>Registra una visita</li>
             </Link>
         </div>

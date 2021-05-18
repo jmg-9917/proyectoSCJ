@@ -1,7 +1,7 @@
 import './App.css';
 
 import RegisterDashboard from './RegisterDashboard';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import LogIn from './login';
 import Presentation from './mainPage';
 import Dashboard from './dashboard';

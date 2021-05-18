@@ -6,6 +6,7 @@ import RegisterEvent from './RegisterEvent';
 import RegisterMeeting from './RegisterMeeting';
 import RegisterLabReport from './RegisterLabReport';
 import RegisterVisita from './RegisterVisit';
+import AlterItems from './AlterItems';
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { Navbar, Nav } from 'react-bootstrap';
@@ -41,11 +42,12 @@ function RegisterDashboard() {
             <body>
                 <Router>
                     <WelcomeAdminComponent />
-                    <Route path="/registerMember" component={RegisterMember} />
-                    <Route path="/registerEvent" component={RegisterEvent} />
-                    <Route path="/registerMeeting" component={RegisterMeeting} />
-                    <Route path="/registerLabReport" component={RegisterLabReport} />
-                    <Route path="/registerVisit" component={RegisterVisita} />
+                    <Route path="/registerDashboard/registerMember" component={RegisterMember} />
+                    <Route path="/registerDashboard/alterItems" component={AlterItems} />
+                    <Route path="/registerDashboard/registerEvent" component={RegisterEvent} />
+                    <Route path="/registerDashboard/registerMeeting" component={RegisterMeeting} />
+                    <Route path="/registerDashboard/registerLabReport" component={RegisterLabReport} />
+                    <Route path="/registerDashboard/registerVisit" component={RegisterVisita} />
                 </Router>
             </body>
         </div>

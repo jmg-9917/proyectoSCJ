@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
-import { useState } from 'react';
-import { useHistory, Link, Redirect } from 'react-router-dom';
+import {useState} from 'react';
+import {useHistory, Link, Redirect} from 'react-router-dom';
 
 function WelcomeComponent() {
     const [nombre, setNombre] = useState("");

@@ -32,7 +32,9 @@ App {
     display: flex-direction;
 }
 
-
+li{
+    list-style:none;
+};
 header{
     position: fixed;
     top: 0;

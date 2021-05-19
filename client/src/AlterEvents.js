@@ -2,20 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
-
+import { useHistory } from 'react-router-dom';
 function AlterEvents() {
     Axios.defaults.withCredentials = true
     const [nombreEvento, setNombreEvento] = useState('');
     const [eventos, setEventos] = useState([]);
-
-    const [nuevoNombre, setNuevoNombre] = useState('');
-    const [nuevaCiudad, setNuevaCiudad] = useState('');
-    const [boolNacional, setBoolNacional] = useState(0);
-    const [nuevaDescripcion, setNuevaDescripcion] = useState('');
-    const [chosenId, setChosenId] = useState(0);
+    const history = useHistory();
     useEffect(() => {
         let isMounted = true;
         Axios.defaults.withCredentials = true
@@ -33,18 +27,20 @@ function AlterEvents() {
 
     }
 
-    const updateEvent = (id) => {
-        setChosenId(id)
-        Axios.put('http://localhost:3002/updateEvent', {
-            noEvento: chosenId,
-            nuevoNombre: nuevoNombre,
-            nuevaCiudad: nuevaCiudad,
-            boolNacional: boolNacional,
-            nuevaDescripcion: nuevaDescripcion
-        }).then((response) => {
-            console.log(response.data)
-            alert('Evento actualizado');
+    const PassDataThrough = (noEvento, nombreEvento, ciudad, nacional, descripcion) => {
+        history.push({
+            pathname: "/registerDashboard/alterItems/editEvent",
+            state: {
+                noEvento: noEvento,
+                nombreEvento: nombreEvento,
+                ciudad: ciudad,
+                nacional: nacional,
+                descripcion: descripcion
+            }
+
         })
+        console.log(noEvento)
+        console.log(nombreEvento)
     }
     return (
         <div>
@@ -64,7 +60,7 @@ function AlterEvents() {
                 if (nombreEvento === "") {
                     return val
                 }
-                else if (val.nombreEvento.toLowerCase().includes(nombreEvento.toLowerCase()) || val.noEvento === chosenId) {
+                else if (val.nombreEvento.toLowerCase().includes(nombreEvento.toLowerCase())) {
                     return val
                 }
             }).map((val, key) => {
@@ -82,9 +78,9 @@ function AlterEvents() {
                                 <Card.Text>Ciudad: {val.ciudad}</Card.Text>
                                 <Card.Text>Nacional o local: {nacionalText}</Card.Text>
                                 <Card.Text> Descripcion: {val.descripcion}</Card.Text>
-                                <Accordion.Toggle as={Button} onClick={() => {
-                                    setChosenId(val.noEvento)
-                                }} eventKey={val.noEvento}>Editar</Accordion.Toggle>
+                                <Button onClick={() => {
+                                    PassDataThrough(val.noEvento, val.nombreEvento, val.ciudad, val.nacional, val.descripcion)
+                                }}>Editar</Button>
                                 <Button onClick={eliminateEvent}>Eliminar</Button>
 
 

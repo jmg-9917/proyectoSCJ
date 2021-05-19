@@ -1,56 +1,43 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 function ChosenUserView(props) {
     const history = useHistory();
-    const [nombre, setNombre] = useState('');
-    const [apellidos, setApellidos] = useState('');
-    const [correo_electronico, setCorreo] = useState('');
-    const [puesto, setPuesto] = useState('');
-    const [telefono, setTelefono] = useState('')
-    const [fechaInscripcion, setFecha] = useState('');
-    const [userId, setUserId] = useState('');
+    const userInfo = props.location.state;
 
-    if (props.location.state.userId) {
-        setUserId(props.location.state.userId)
+    function received() {
+        if (userInfo) {
+            return
+        }
+        else { history.push('/dashboard') }
     }
-    else {
-        history.push('/dashboard');
-    }
-    function getChosenUserInfo() {
-        Axios.defaults.withCredententials = true
-
-        Axios.post('http:/localhost:3002/getUser', {
-            id: userId
-        }).then((response) => {
-            console.log(response.data)
-        })
-
-    }
-    getChosenUserInfo()
+    received()
 
     return (
         <>
             <Container>
                 <Row>
                     <Col xs={6}>
-                        Nombre: {nombre}
+                        Nombre: {userInfo.nombre}
                     </Col>
                     <Col xs={6}>
-                        Apellidos: {apellidos}
+                        Apellidos: {userInfo.apellidos}
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={6} md={4}>
-                        Puesto: {puesto}
+                        Puesto: {userInfo.puesto}
                     </Col>
                     <Col xs={6} md={4}>
-                        Telefono: {telefono}
+                        Telefono: {userInfo.telefono}
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={6}>Fecha de incorporacion: {fechaInscripcion}</Col>
+                    <Col xs={6}>Fecha de incorporacion: {userInfo.fechaInscripcion}</Col>
+                </Row>
+                <Row>
+                    <Col xs={6}>Correo electronico: {userInfo.correo}</Col>
                 </Row>
             </Container>
         </>

@@ -7,7 +7,7 @@ function Map() {
         height: '30rem'
     };
     const center = {
-        lat: 23.281909,
+        lat: 23.575287,
         lng: -102.499577
     };
     const { isLoaded } = useJsApiLoader({
@@ -17,6 +17,7 @@ function Map() {
     })
 
     const [map, setMap] = React.useState(null)
+    const [marker, setMarker] = React.useState({})
 
     const onLoad = React.useCallback(function callback(map) {
         const bounds = new window.google.maps.LatLngBounds();
@@ -34,9 +35,20 @@ function Map() {
         <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={10}
+            zoom={5}
             onLoad={onLoad}
             onUnmount={onUnmount}
+            onClick={(e) => {
+                console.log(e.latLng.lat())
+                console.log(e.latLng.lng())
+                setMarker({
+                    lat: e.latLng.lat(),
+                    lng: e.latLng.lng()
+                })
+
+                console.log(marker.lat)
+                console.log(marker.lng)
+            }}
         >
             { /* Child components, such as markers, info windows, etc. */}
             <></>

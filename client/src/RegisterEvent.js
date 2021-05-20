@@ -6,6 +6,7 @@ import React from 'react';
 import {TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
+import Map from './Map';
 const RegisterEvent = () => {
     const [nombreEvento, setNombreEvento] = useState("");
     const [ciudad, setCiudad] = useState("");
@@ -113,6 +114,7 @@ const RegisterEvent = () => {
                     onExpired={e => setToken("")}
                     ref={reCaptcha}
                 ></ReCAPTCHA>
+                <Map />
                 <Button variant="outlined" onClick={registrarEvento}>Registrar evento</Button>
             </form>
         </div>

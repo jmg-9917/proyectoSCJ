@@ -16,7 +16,7 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     key: "userId",
@@ -89,7 +89,7 @@ app.post('/reCaptcha', async (req, res, next) => {
         const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret + "&response=" + req.body.token
 
         const response = await axios.post(url)
-        const {success} = response.data
+        const { success } = response.data
 
         if (success) {
             console.log(success)
@@ -113,7 +113,7 @@ app.post('/createLabReport', async (req, res) => {
     db.query("INSERT INTO practicas (nombre,descripcion,categoria) VALUES(?,?,?)",
         [nombre, descripcion, categoria],
         (err, result) => {
-            if (err) {console.log(err)}
+            if (err) { console.log(err) }
             else {
                 res.send(result)
 
@@ -129,7 +129,7 @@ app.post('/createVisit', async (req, res) => {
     db.query("INSERT INTO visitas (nombre,descripcion,categoria) VALUES(?,?,?)",
         [nombre, descripcion, categoria],
         (err, result) => {
-            if (err) {console.log(err)}
+            if (err) { console.log(err) }
             else {
                 res.send(result)
 
@@ -145,7 +145,7 @@ app.post('/createJunta', async (req, res) => {
     db.query("INSERT INTO Juntas (tipo,descripcion,participantes) VALUES(?,?,?)",
         [tipo, descripcion, partipantes],
         (err, result) => {
-            if (err) {console.log(err)}
+            if (err) { console.log(err) }
             else {
                 res.send(result)
 
@@ -168,8 +168,8 @@ app.post('/create', async (req, res) => {
         [nombre, apellidos, telefono, correo, password, fecha, puesto, activo],
         (err, result) => {
 
-            if (err) {console.log(err)}
-            else {res.send("Values inserted")}
+            if (err) { console.log(err) }
+            else { res.send("Values inserted") }
 
         }
     );
@@ -188,8 +188,8 @@ app.post('/createEvent', async (req, res) => {
         [nombre, ciudad, nacional, descripcion],
         (err, result) => {
 
-            if (err) {console.log(err)}
-            else {res.send("Values inserted")}
+            if (err) { console.log(err) }
+            else { res.send("Values inserted") }
 
         }
     );
@@ -201,10 +201,10 @@ app.post('/createEvent', async (req, res) => {
 app.get('/login', (req, res) => {
     if (req.session.user) {
 
-        res.send({LoggedIn: true, user: [req.session.user]});
+        res.send({ LoggedIn: true, user: [req.session.user] });
     }
     else {
-        res.send({LoggedIn: false, user: []});
+        res.send({ LoggedIn: false, user: [] });
     }
 })
 
@@ -216,7 +216,7 @@ app.post('/login', async (req, res) => {
         db.query("SELECT * FROM Integrante WHERE correo_electronico = ? AND contraseña =? ",
             [correo, password], (err, result) => {
                 if (err) {
-                    res.send({err: err})
+                    res.send({ err: err })
                 }
                 if (result) {
                     req.session.user = result;
@@ -224,7 +224,7 @@ app.post('/login', async (req, res) => {
                     res.send(result)
                 }
                 else {
-                    res.send({message: "Wrong combination"})
+                    res.send({ message: "Wrong combination" })
                 }
             })
 
@@ -266,14 +266,14 @@ app.post('/getUser', async (req, res) => {
         db.query("SELECT * FROM Integrantes WHERE idIntegrante = ? ",
             [idIntegrante], (err, result) => {
                 if (err) {
-                    res.send({err: err})
+                    res.send({ err: err })
                 }
                 if (result) {
                     console.log(req.session.user);
                     res.send(result)
                 }
                 else {
-                    res.send({message: "Wrong combination"})
+                    res.send({ message: "Wrong combination" })
                 }
             })
 

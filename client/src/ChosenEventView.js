@@ -7,7 +7,7 @@ import { TextField } from '@material-ui/core';
 function ChosenEventView(props) {
     const history = useHistory();
     const eventInfo = props.location.state;
-
+    const noEvento = eventInfo.noEvento;
     const [nombre, setNombre] = useState('');
     const [ciudad, setCiudad] = useState('');
     const [nacional, setNacional] = useState('');
@@ -20,6 +20,33 @@ function ChosenEventView(props) {
         else { <Redirect to='/registerDashboard' /> }
     }
     received()
+
+    const updateData = () => {
+        const numNacional = substituteForNum(nacional)
+        Axios.defaults.withCredentials = true
+        Axios.put('http://localhost:3002/updateEvent', {
+            noEvento: noEvento,
+            nuevoNombre: nombre,
+            nuevaCiudad: ciudad,
+            boolNacional: numNacional,
+            nuevaDescripcion: descr
+        })
+
+    };
+
+    const substituteForText = (nacionalBool) => {
+        if (nacionalBool !== 1) {
+            return "Local"
+        }
+        return "Nacional"
+    };
+
+    const substituteForNum = (nacionalText) => {
+        if (nacionalText !== "Local") {
+            return 1
+        }
+        return 0
+    };
 
     return (
         <>
@@ -41,7 +68,7 @@ function ChosenEventView(props) {
                     </Col>
                     <Col xs={6}>
                         Nacional:
-                        <TextField placeholder={eventInfo.nacional}
+                        <TextField placeholder={substituteForText(eventInfo.nacional)}
                             onChange={(e) => {
                                 setNacional(e.target.value)
                             }}
@@ -56,7 +83,9 @@ function ChosenEventView(props) {
                                 }}  ></TextField>
                         </Col>
                     </Row>
-                    <Button>Actualizar</Button>
+                    <Button onClick={() => {
+                        updateData()
+                    }}>Actualizar</Button>
 
 
                 </Row>

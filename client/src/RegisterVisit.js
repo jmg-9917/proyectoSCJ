@@ -53,8 +53,8 @@ const RegisterVisita = () => {
     return (
         <div>
             <form id="integrante-form" className="information">
-                <h2>Registrar practica</h2>
-                <label>Nombre de la practica:</label>
+                <h2>Registrar visita</h2>
+                <label>Nombre de la visita:</label>
                 <TextField
                     id="practica-nombre-textfield"
                     type="text"
@@ -72,7 +72,7 @@ const RegisterVisita = () => {
 
                     }}
                 />
-                <label>Descripcion de la practica</label>
+                <label>Descripcion de la visita</label>
                 <TextField
                     id="practica-descripcion-textfield"
                     type="text"

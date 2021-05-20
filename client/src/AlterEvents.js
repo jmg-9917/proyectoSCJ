@@ -25,6 +25,7 @@ function AlterEvents() {
 
     const eliminateEvent = (id) => {
 
+
     }
 
     const PassDataThrough = (noEvento, nombreEvento, ciudad, nacional, descripcion) => {
@@ -81,7 +82,7 @@ function AlterEvents() {
                                 <Button onClick={() => {
                                     PassDataThrough(val.noEvento, val.nombreEvento, val.ciudad, val.nacional, val.descripcion)
                                 }}>Editar</Button>
-                                <Button onClick={eliminateEvent}>Eliminar</Button>
+                                <Button onClick={() => { eliminateEvent(val.noEvento) }}>Eliminar</Button>
 
 
                             </Card.Header>

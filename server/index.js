@@ -210,6 +210,19 @@ app.delete('/deleteEvent/:id', async (req, res) => {
         })
 })
 
+app.delete('/deleteIntegrante/:id', async (req, res) => {
+    console.log(req)
+    const id = req.params.id
+    console.log(id)
+    db.query("DELETE FROM Integrante WHERE idIntegrante = ?", id,
+        (err, result) => {
+            if (err) {
+                console.log(id)
+                console.log(err)
+            }
+            else { res.send(result) }
+        })
+})
 
 app.get('/login', (req, res) => {
     if (req.session.user) {

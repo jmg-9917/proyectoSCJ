@@ -11,7 +11,7 @@ const axios = require('axios');
 app.use(express.json());
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
 
@@ -196,6 +196,19 @@ app.post('/createEvent', async (req, res) => {
 });
 
 
+app.delete('/deleteEvent/:id', async (req, res) => {
+    console.log(req)
+    const id = req.params.id
+    console.log(id)
+    db.query("DELETE FROM Eventos WHERE noEvento = ?", id,
+        (err, result) => {
+            if (err) {
+                console.log(id)
+                console.log(err)
+            }
+            else { res.send(result) }
+        })
+})
 
 
 app.get('/login', (req, res) => {
@@ -251,7 +264,6 @@ app.put('/updateEvent', async (req, res) => {
             }
             if (result) {
                 res.send(result)
-                res.redirect('/registerDashboard/alterItems/alterEvents')
             }
         })
     }

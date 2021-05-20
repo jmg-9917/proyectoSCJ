@@ -24,8 +24,10 @@ function AlterEvents() {
     })
 
     const eliminateEvent = (id) => {
-
-
+        Axios.defaults.withCredentials = true
+        Axios.delete(`http://localhost:3002/deleteEvent/${id}`)
+        alert('Evento borrado correctamente.')
+        history.push('/registerDashboard/alterItems/alterEvents')
     }
 
     const PassDataThrough = (noEvento, nombreEvento, ciudad, nacional, descripcion) => {

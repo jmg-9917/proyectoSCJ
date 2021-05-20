@@ -31,6 +31,10 @@ function ChosenEventView(props) {
             boolNacional: numNacional,
             nuevaDescripcion: descr
         })
+        history.push(
+            "/registerDashboard/alterItems/alterEvents"
+        )
+        alert('Evento actualizado correctamente.')
 
     };
 

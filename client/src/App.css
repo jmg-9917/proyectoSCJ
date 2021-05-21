@@ -48,6 +48,11 @@ App {
 .opening-mainpage-location h1{
     align-content:center;
 }
+
+.card-placement{
+    padding-top: 2rem;
+    padding-left: 3rem;
+}
 *{
     margin: 0;
     padding: 0;

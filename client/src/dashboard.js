@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App.css';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import Axios from 'axios';
 import BuscarEvento from './BuscarEvento';
 import BuscarIntegrante from './BuscarIntegrante';
@@ -10,8 +10,8 @@ import MostrarEventos from './MostrarEventos';
 import WelcomeComponent from './WelcomeComponent';
 import UserProfileView from './UserProfileView';
 import ChosenUserView from './ChosenUserView';
-import { Navbar, Nav } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 function Dashboard() {
     const handleLogOut = () => {
         Axios.defaults.withCredentials = true
@@ -42,16 +42,18 @@ function Dashboard() {
                 </div>
             </header>
             <body>
-                <Router>
-                    <WelcomeComponent />
-                    <Route path="/dashboard/buscarIntegrante" component={BuscarIntegrante} />
-                    <Route path="/dashboard/verInfoIntegrante" component={ChosenUserView} />
-                    <Route path="/dashboard/buscarEvento" component={BuscarEvento} />
-                    <Route path="/dashboard/mostrarEventos" component={MostrarEventos} />
-                    <Route path="/dashboard/buscarPractica" component={BuscarPractica} />
-                    <Route path="/dashboard/buscarJunta" component={BuscarJunta} />
-                    <Route path="/dashboard/verPerfil" component={UserProfileView} />
-                </Router>
+                <div className="parent">
+                    <Router>
+                        <WelcomeComponent />
+                        <Route path="/dashboard/buscarIntegrante" component={BuscarIntegrante} />
+                        <Route path="/dashboard/verInfoIntegrante" component={ChosenUserView} />
+                        <Route path="/dashboard/buscarEvento" component={BuscarEvento} />
+                        <Route path="/dashboard/mostrarEventos" component={MostrarEventos} />
+                        <Route path="/dashboard/buscarPractica" component={BuscarPractica} />
+                        <Route path="/dashboard/buscarJunta" component={BuscarJunta} />
+                        <Route path="/dashboard/verPerfil" component={UserProfileView} />
+                    </Router>
+                </div>
             </body>
 
         </div>

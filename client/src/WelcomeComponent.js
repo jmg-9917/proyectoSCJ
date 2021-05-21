@@ -1,7 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
-import {useState} from 'react';
-import {useHistory, Link, Redirect} from 'react-router-dom';
+import { useState } from 'react';
+import { useHistory, Link, Redirect } from 'react-router-dom';
+import { ListGroup } from 'react-bootstrap';
 
 function WelcomeComponent() {
     const [nombre, setNombre] = useState("");
@@ -24,28 +25,39 @@ function WelcomeComponent() {
     UserFound()
     return (
         <div>
-            <h1>Bienvenido {nombre + " " + apellidos} </h1>
-            <h1>Busca eventos de tu interes o encuentra informacion de algun integrante!</h1>
-            <Link to="/dashboard/buscarIntegrante">
-                <li>Buscar integrante</li>
-            </Link>
-            <Link to="/dashboard/buscarEvento">
-                <li>Buscar evento</li>
-            </Link>
-            <Link to="/dashboard/buscarJunta">
-                <li>Buscar junta</li>
-            </Link>
-            <Link to="/dashboard/buscarPractica">
-                <li>Buscar practica</li>
-            </Link>
+            <ListGroup >
+                <ListGroup.Item>
+                    <Link to="/dashboard/verPerfil">
+                        <li>Ver informacion de su perfil</li>
+                    </Link>
+                </ListGroup.Item >
+                <ListGroup.Item >
+                    <Link to="/dashboard/buscarIntegrante">
+                        <li>Buscar integrante</li>
+                    </Link>
+                </ListGroup.Item >
+                <ListGroup.Item >
+                    <Link to="/dashboard/buscarEvento">
+                        <li>Buscar evento</li>
+                    </Link>
+                </ListGroup.Item >
+                <ListGroup.Item >
+                    <Link to="/dashboard/buscarJunta">
+                        <li>Buscar junta</li>
+                    </Link>
+                </ListGroup.Item >
+                <ListGroup.Item >
+                    <Link to="/dashboard/buscarPractica">
+                        <li>Buscar practica</li>
+                    </Link>
+                </ListGroup.Item >
 
-            <Link to="/dashboard/mostrarEventos">
-                <li>Mostrar eventos</li>
-            </Link>
-            <Link to="/dashboard/verPerfil">
-                <li>Ver informacion de su perfil</li>
-            </Link>
-
+                <ListGroup.Item >
+                    <Link to="/dashboard/mostrarEventos">
+                        <li>Mostrar eventos</li>
+                    </Link>
+                </ListGroup.Item>
+            </ListGroup >
         </div>
 
 

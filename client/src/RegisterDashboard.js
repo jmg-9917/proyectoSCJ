@@ -1,5 +1,5 @@
 import './App.css';
-import { Link, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {Link, BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import WelcomeAdminComponent from './WelcomeAdminComponent';
 import RegisterMember from './RegisterMember';
 import RegisterEvent from './RegisterEvent';
@@ -9,7 +9,7 @@ import RegisterVisita from './RegisterVisit';
 import AlterItems from './AlterItems';
 import Axios from 'axios';
 import Button from '@material-ui/core/Button';
-import { Navbar, Nav } from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
 function RegisterDashboard() {
     Axios.defaults.withCredentials = true
     const handleLogOut = () => {
@@ -40,15 +40,17 @@ function RegisterDashboard() {
                 </div>
             </header>
             <body>
-                <Router>
-                    <WelcomeAdminComponent />
-                    <Route path="/registerDashboard/registerMember" component={RegisterMember} />
-                    <Route path="/registerDashboard/alterItems" component={AlterItems} />
-                    <Route path="/registerDashboard/registerEvent" component={RegisterEvent} />
-                    <Route path="/registerDashboard/registerMeeting" component={RegisterMeeting} />
-                    <Route path="/registerDashboard/registerLabReport" component={RegisterLabReport} />
-                    <Route path="/registerDashboard/registerVisit" component={RegisterVisita} />
-                </Router>
+                <div className="parent">
+                    <Router>
+                        <WelcomeAdminComponent />
+                        <Route path="/registerDashboard/registerMember" component={RegisterMember} />
+                        <Route path="/registerDashboard/alterItems" component={AlterItems} />
+                        <Route path="/registerDashboard/registerEvent" component={RegisterEvent} />
+                        <Route path="/registerDashboard/registerMeeting" component={RegisterMeeting} />
+                        <Route path="/registerDashboard/registerLabReport" component={RegisterLabReport} />
+                        <Route path="/registerDashboard/registerVisit" component={RegisterVisita} />
+                    </Router>
+                </div>
             </body>
         </div>
     )

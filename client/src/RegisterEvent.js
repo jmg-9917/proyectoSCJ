@@ -1,12 +1,12 @@
 
 import './App.css';
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import Axios from 'axios'
 import React from 'react';
-import {TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
+import { TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
-import Map from './Map';
+import Address from './Address';
 const RegisterEvent = () => {
     const [nombreEvento, setNombreEvento] = useState("");
     const [ciudad, setCiudad] = useState("");
@@ -69,7 +69,7 @@ const RegisterEvent = () => {
 
     return (
         <div>
-            <form id="integrante-form" className="information">
+            <form id="integrante-form" >
                 <h2>Registrar evento</h2>
                 <label>Nombre del evento:</label>
                 <TextField
@@ -114,7 +114,7 @@ const RegisterEvent = () => {
                     onExpired={e => setToken("")}
                     ref={reCaptcha}
                 ></ReCAPTCHA>
-                <Map />
+                <Address />
                 <Button variant="outlined" onClick={registrarEvento}>Registrar evento</Button>
             </form>
         </div>

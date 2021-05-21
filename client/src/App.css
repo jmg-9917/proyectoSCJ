@@ -1,11 +1,24 @@
 App {
   text-align: center;
-  display: flex;
+}
+.mainDisplay{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin: 1rem;
+    margin-right: 3rem;
+}
+.row{
+    display: flex;
+    padding-bottom: 2rem;
+    padding-left: 3rem;
+}
+.parent{
+    margin-left: 5rem;
+    margin-bottom: 20rem;
+    display: flex;
 }
 
-.opening-navbar-location{
-    z-index: auto;
-}
 .opening-mainpage-location h1{
     align-content:center;
 }
@@ -13,6 +26,21 @@ App {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.spacing-row-items{
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+    column-gap: 10rem;
+}
+.column{
+    display:flex ;
+    flex-direction: column;
+
+}
+.ListGroup{
+    width: 20%;
 }
 
 .Carousel{
@@ -41,13 +69,12 @@ header{
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 1em;
     padding-top: 0em;
 }
 body{
-    padding-top: 3rem;
+    padding-top: -3rem;
     padding-left: 1em;
     padding-right: 1em;
 
@@ -69,7 +96,7 @@ nav{
 }
 
 .nav-links {
-    width: 40%;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -77,10 +104,9 @@ nav{
     
 }
 
-.information{
+.information {
     display: flex;
     flex-direction: column;
-    padding-top: 2rem;
     column-gap: 7rem;
     width: 100%;
     align-items: stretch;
@@ -88,6 +114,7 @@ nav{
     align-items: center;
     font-family: Arial;
 }
+
 
 .information label{
     padding: 2rem;

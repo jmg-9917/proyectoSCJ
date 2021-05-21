@@ -8,6 +8,7 @@ import validator from 'validator';
 import GetFormattedDate from './GetFormattedDate';
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
+import { Row, Container, Col } from 'react-bootstrap'
 const RegisterMember = () => {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");
@@ -147,75 +148,123 @@ const RegisterMember = () => {
 
 
     };
-    return (<div className="App">
-        <div className="information">
-            <form id="integrante-form" className="information">
-                <h2>Registrar integrante</h2>
-                <label>Nombre:</label>
-                <TextField
-                    type="text"
-                    onChange={(event) => {
-                        setNombre(event.target.value)
+    return (<div>
+        <div className="mainDisplay">
+            <form id="integrante-form"  >
+                <Container>
+                    <Row className="row">
+                        <Col xs={5} md={10}>
+                            <h2>Registrar integrante</h2>
+                        </Col>
+                    </Row>
+                    <Row className="row">
+                        <Col xs={5} md={4}>
+                            <label>Nombre:</label>
+                            <TextField
+                                type="text"
+                                onChange={(event) => {
+                                    setNombre(event.target.value)
 
-                    }}
-                />
-                <label>Apellidos</label>
-                <TextField
-                    type="text"
-                    onChange={(event) => {
-                        setApellidos(event.target.value)
+                                }}
+                            />
+                        </Col>
+                        <Col xs={2} md={4}>
+                            <label>Apellidos</label>
+                            <TextField
+                                type="text"
+                                onChange={(event) => {
+                                    setApellidos(event.target.value)
 
-                    }}
-                />
-                <label>Telefono:</label>
-                <TextField
-                    type="number"
-                    onChange={(event) => {
-                        setTelefono(event.target.value)
+                                }}
+                            />
+                        </Col>
+                    </Row>
+                    <Row className="row">
+                        <Col xs={15} md={4}>
+                            <label>Telefono:</label>
+                            <TextField
+                                type="number"
+                                onChange={(event) => {
+                                    setTelefono(event.target.value)
 
-                    }}
-                />
-                <label>Correo electronico:</label>
-                <TextField
-                    type="text"
-                    onChange={(event) => {
-                        setCorreo(event.target.value)
+                                }}
+                            />
+                        </Col>
+                        <Col xs={15} md={4}>
+                            <label>Correo electronico:</label>
+                            <TextField
+                                type="text"
+                                onChange={(event) => {
+                                    setCorreo(event.target.value)
 
-                    }}
-                />
-                <label>Contraseña:</label>
-                <TextField
-                    type="password"
-                    onChange={(event) => {
-                        setPassword(event.target.value)
+                                }}
+                            />
+                        </Col>
+                    </Row>
+                    <Row className="row">
+                        <Col xs={15} md={4}>
+                            <label>Contraseña:</label>
+                            <TextField
+                                type="password"
+                                onChange={(event) => {
+                                    setPassword(event.target.value)
 
-                    }}
-                />
-                <label>Confirme contraseña:</label>
-                <TextField
-                    type="password"
-                    onChange={(event) => {
-                        setPasswordConfirmation(event.target.value)
+                                }}
+                            />
+                        </Col>
+                        <Col xs={15} md={4}>
+                            <label>Confirme contraseña:</label>
+                            <TextField
+                                type="password"
+                                onChange={(event) => {
+                                    setPasswordConfirmation(event.target.value)
 
-                    }}
-                />
-                <label>Puesto:</label>
-                <TextField
-                    type="text"
-                    onChange={(event) => {
-                        setPuesto(event.target.value)
+                                }}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={2} >
+                        </Col>
+                        <Col xs={6} md={4} >
+                            <label>Puesto:</label>
+                            <TextField
+                                type="text"
+                                onChange={(event) => {
+                                    setPuesto(event.target.value)
 
-                    }}
-                />
-                <ReCAPTCHA className="recaptcha-Spacing"
-                    sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
-                    onChange={token => {
-                        setToken(token)
-                    }}
-                    onExpired={e => setToken("")}
-                    ref={reCaptcha}
-                ></ReCAPTCHA>
-                <Button variant="outlined" onClick={registrarIntegrante}>Registrar integrante</Button>
+                                }}
+                            />
+                        </Col>
+                        <Col >
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col  >
+                        </Col>
+                        <Col xs={10}>
+                            <ReCAPTCHA
+                                sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
+                                onChange={token => {
+                                    setToken(token)
+                                }}
+                                onExpired={e => setToken("")}
+                                ref={reCaptcha}
+                            ></ReCAPTCHA>
+                        </Col>
+                        <Col >
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col >
+                        </Col>
+                        <Col xs={8} >
+                            <Button variant="outlined" onClick={registrarIntegrante}>Registrar integrante</Button>
+                        </Col>
+                        <Col >
+                        </Col>
+                    </Row>
+                </Container>
             </form>
 
 

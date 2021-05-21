@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Axios from 'axios';
-import { useHistory, useLocation, Redirect } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import {useHistory, useLocation, Redirect} from 'react-router-dom';
+import {Container, Row, Col} from 'react-bootstrap';
 function ChosenUserView(props) {
     const history = useHistory();
     const userInfo = props.location.state;
@@ -10,7 +10,7 @@ function ChosenUserView(props) {
         if (userInfo) {
             return
         }
-        else { history.push('/dashboard') }
+        else {history.push('/dashboard')}
     }
     received()
 

@@ -2,6 +2,7 @@ import './App.css';
 import Axios from 'axios'
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { ListGroup } from 'react-bootstrap-v5';
 const WelcomeAdminComponent = () => {
     const history = useHistory();
     function userFound() {
@@ -22,29 +23,44 @@ const WelcomeAdminComponent = () => {
     }
     userFound()
     return (
-        <div>
-            <Link to="/registerDashboard/registerMember">
-                <li>Registrar Miembro</li>
-            </Link>
-            <Link to="/registerDashboard/alterItems">
-                <li>Altera algo</li>
-            </Link>
-
-            <Link to="/registerDashboard/registerMeeting">
-                <li>Registrar una junta</li>
-            </Link>
-            <Link to="/registerDashboard/registerEvent">
-                <li>Registrar un evento</li>
-            </Link>
-            <Link to="/registerDashboard/registerLabReport">
-                <li>Registra una practica</li>
-            </Link>
-            <Link to="/registerDashboard/registerMaterials">
-                <li>Registra materiales</li>
-            </Link>
-            <Link to="/registerDashboard/registerVisit">
-                <li>Registra una visita</li>
-            </Link>
+        <div >
+            <ListGroup >
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/registerMember">
+                        <li>Registrar Miembro</li>
+                    </Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/alterItems">
+                        <li>Altera algo</li>
+                    </Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/registerMeeting">
+                        <li>Registrar una junta</li>
+                    </Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/registerEvent">
+                        <li>Registrar un evento</li>
+                    </Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/registerLabReport">
+                        <li>Registra una practica</li>
+                    </Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/registerMaterials">
+                        <li>Registra materiales</li>
+                    </Link>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <Link to="/registerDashboard/registerVisit">
+                        <li>Registra una visita</li>
+                    </Link>
+                </ListGroup.Item>
+            </ListGroup>
         </div>
     )
 

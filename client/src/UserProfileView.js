@@ -42,58 +42,53 @@ function UserProfileView() {
                 console.log(response.data)
 
             })
-    }
+    };
 
     UserInfo()
     return (
         <>
-            <Container>
-                <Row>
-                    <Col xs={6}>
-                        Nombre: {nombre}
-                    </Col>
-                    <Col xs={6}>
-                        Apellidos: {apellidos}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={6} md={4}>
-                        Puesto: {puesto}
-                    </Col>
-                    <Col xs={6} md={4}>
-                        Telefono: {telefono}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={6}>Fecha de incorporacion: {fechaInscripcion}</Col>
-                </Row>
-            </Container>
-            <Button onClick={() => viewEvents()}>Ver Eventos</Button>
-            {eventos.map((val, key) => {
-                var nacionalText = ""
-                if (val.nacional === 1) {
-                    nacionalText = "Nacional"
+            <div className="place-column">
+                <Container className="userProfile-info">
+                    <Row>
+                        <Col xs={6}>
+                            Nombre: {nombre}
+                        </Col>
+                        <Col xs={6}>
+                            Apellidos: {apellidos}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={6} md={4}>
+                            Puesto: {puesto}
+                        </Col>
+                        <Col xs={6} md={4}>
+                            Telefono: {telefono}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={6}>Fecha de incorporacion: {fechaInscripcion}</Col>
+                    </Row>
+                </Container>
 
-                }
-                else {nacionalText = "Local"}
-                return (
-                    <div className="card-placement">
-                        <Fade in={open} timeout={500}>
-                            <Card key={key} className="Card-appearence" >
-                                <Card.Body>
-                                    <Card.Title>{val.nombreEvento}</Card.Title>
-                                    <Card.Text>{val.ciudad}</Card.Text>
-                                    <Card.Text>{nacionalText}</Card.Text>
-                                    <Card.Text>{val.descripcion}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Fade>
-                    </div>
+                <div className="subscribed-events">
+                    <Button onClick={() => viewEvents()}>Ver Eventos</Button>
+                    {eventos.map((val, key) => {
+                        return (
+                            <div className="card-placement">
+                                <Fade in={open} timeout={500}>
+                                    <Card key={key} className="card-Names" >
+                                        <Card.Body>
+                                            <Card.Title>{val.nombreEvento}</Card.Title>
+                                        </Card.Body>
+                                    </Card>
+                                </Fade>
+                            </div>
 
-                )
+                        )
 
-            })}
-
+                    })}
+                </div>
+            </div>
         </>
     )
 }

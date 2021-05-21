@@ -44,11 +44,18 @@ App {
 .login-item{
     padding: 3rem;
 }
+.subscribed-events{
+    padding-top: 5rem;
+    padding-left: 3rem;
+}
 
 .opening-mainpage-location h1{
     align-content:center;
 }
 
+.card-Names{
+    width:18rem
+}
 .card-placement{
     padding-top: 2rem;
     padding-left: 3rem;

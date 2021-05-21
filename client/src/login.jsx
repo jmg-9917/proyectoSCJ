@@ -1,12 +1,13 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+import {TextField, Button} from '@material-ui/core';
 import validator from 'validator';
 import ReCAPTCHA from 'react-google-recaptcha';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Card} from 'react-bootstrap';
 const LogIn = () => {
     const [correo_electronico, setCorreo] = useState("");
     const [password, setPassword] = useState("");
@@ -99,39 +100,51 @@ const LogIn = () => {
 
 
     return (
-        <div className="App">
-            <div className="information">
-                <h1>Log In</h1>
-                <label>Correo Electronico:</label>
-                <TextField
-                    type="text"
-                    onChange={(event) => {
-                        setCorreo(event.target.value)
-                    }}
-                    helperText={correoError}
-                />
-                <label>Contraseña:</label>
-                <TextField
-                    type="password"
-                    onChange={(event) => {
-                        setPassword(event.target.value)
+        <div>
+            <div >
+                <Card className='login-card'>
+                    <Card.Title className="login-title">
+                        <h3>Log In</h3>
+                    </Card.Title>
+                    <div >
+                        <Card.Body className="login-items">
+                            <TextField
+                                className="login-item"
+                                type="text"
+                                label="Correo Electronico"
+                                onChange={(event) => {
+                                    setCorreo(event.target.value)
+                                }}
+                                helperText={correoError}
+                            />
+                            <TextField
+                                className="login-item"
+                                type="password"
+                                label="Contraseña"
+                                onChange={(event) => {
+                                    setPassword(event.target.value)
 
-                    }}
-                    helperText={passwordError}
-                />
-                <ReCAPTCHA className="recaptcha-Spacing"
-                    sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
-                    onChange={token => {
-                        setToken(token)
-                    }}
-                    onExpired={e => setToken("")}
-                    ref={reCaptcha}
-                ></ReCAPTCHA>
-                <Button
-                    type="submit"
-                    onClick={ingresar}>
-                    Continuar
-            </Button>
+                                }}
+                                helperText={passwordError}
+                            />
+                            <ReCAPTCHA
+                                className="login-item"
+                                sitekey="6LdSbs0aAAAAAIQgPXIQXHfEPB9WyTKyv2iyYljm"
+                                onChange={token => {
+                                    setToken(token)
+                                }}
+                                onExpired={e => setToken("")}
+                                ref={reCaptcha}
+                            ></ReCAPTCHA>
+                            <Button
+                                className="login-item"
+                                type="submit"
+                                onClick={ingresar}>
+                                Continuar
+        </Button>
+                        </Card.Body>
+                    </div>
+                </Card>
             </div>
         </div>
 

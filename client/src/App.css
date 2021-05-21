@@ -19,6 +19,32 @@ App {
     display: flex;
 }
 
+.login-card{
+    width: 35%;
+    height: 30%;
+    margin-top: 3rem;
+    margin-left: 33%;
+    margin-bottom: 3rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+.login-title{
+    margin-left: 3rem;
+}
+.login-items{
+    padding: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+
+.login-item{
+    padding: 3rem;
+}
+
 .opening-mainpage-location h1{
     align-content:center;
 }

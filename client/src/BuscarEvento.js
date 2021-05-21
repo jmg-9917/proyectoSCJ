@@ -12,8 +12,6 @@ function BuscarEvento() {
     const [idIntegrante, setIdIntegrante] = useState('')
     const [open, setOpen] = useState(true);
     const history = useHistory()
-    const instant = GetFormattedDate
-    const [fecha,setFecha] = useState(instant)
 
     useEffect(() => {
         let isMounted = true;
@@ -40,7 +38,7 @@ function BuscarEvento() {
         })
     }
     UserFound()
-    const SubscribeToEvent = (noEvento) => {
+    const SubscribeToEvent = (noEvento, fecha) => {
         Axios.defaults.withCredentials = true
         Axios.post("http://localhost:3002/suscribeToEvent", {
             idIntegrante: idIntegrante,
@@ -90,7 +88,7 @@ function BuscarEvento() {
                                         <Card.Text>{val.descripcion}</Card.Text>
                                         <Button
                                             onClick={() => {
-                                                SubscribeToEvent(val.noEvento)
+                                                SubscribeToEvent(val.noEvento, val.fecha)
                                             }}>Inscribete al evento!</Button>
                                     </Card.Body>
                                 </Card>

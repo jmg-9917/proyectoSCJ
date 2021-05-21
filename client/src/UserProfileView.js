@@ -12,6 +12,7 @@ function UserProfileView() {
     const [telefono, setTelefono] = useState('')
     const [fechaInscripcion, setFecha] = useState('');
     const [eventos, setEventos] = useState([]);
+    const [counter, setCounter] = useState(false);
     const open = true;
     function UserInfo() {
         Axios.defaults.withCredentials = true
@@ -34,15 +35,22 @@ function UserProfileView() {
         })
     }
     const viewEvents = () => {
-        Axios.post("http://localhost:3002/subscribedEvents", {
-            idIntegrante: idIntegrante
-        })
-            .then((response) => {
-                setEventos(response.data)
-                console.log(response.data)
-
+        setCounter(!counter)
+        if (counter) {
+            Axios.post("http://localhost:3002/subscribedEvents", {
+                idIntegrante: idIntegrante
             })
-    };
+                .then((response) => {
+                    setEventos(response.data)
+                    console.log(response.data)
+
+                })
+
+        }
+        else {
+            setEventos([])
+        };
+    }
 
     UserInfo()
     return (

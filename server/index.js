@@ -66,6 +66,18 @@ app.get('/eventos', (req, res) => {
         }
     })
 })
+app.post('/subscribedEvents', (req, res) => {
+    const idIntegrante = req.body.idIntegrante
+
+    db.query("SELECT DISTINCT e.nombreEvento FROM eventos e, integrante_evento ie WHERE e.noEvento = ie.noEvento AND ? = ie.idIntegrante;", [idIntegrante], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
 
 app.get('/integrantes', async (req, res) => {
     db.query("SELECT * FROM Integrante",

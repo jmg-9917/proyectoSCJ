@@ -1,18 +1,18 @@
-
-import GetFormattedDate from './GetFormattedDate';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { TextField, Fade } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Axios from 'axios'
+import SubscribeToEvent from './Subscription';
+import Axios from 'axios';
+import GetFormatted from './GetFormattedDate';
 function BuscarEvento() {
     const [nombreEvento, setNombreEvento] = useState('');
     const [eventos, setEventos] = useState([]);
     const [idIntegrante, setIdIntegrante] = useState('')
     const [open, setOpen] = useState(true);
     const history = useHistory()
-
+    const fecha = GetFormatted
     useEffect(() => {
         let isMounted = true;
         Axios.get("http://localhost:3002/eventos")
@@ -38,17 +38,7 @@ function BuscarEvento() {
         })
     }
     UserFound()
-    const SubscribeToEvent = (noEvento, fecha) => {
-        Axios.defaults.withCredentials = true
-        Axios.post("http://localhost:3002/suscribeToEvent", {
-            idIntegrante: idIntegrante,
-            noEvento: noEvento,
-            fecha: fecha
-        }).then(() => {
-            console.log("Usuario" + idIntegrante + " registrado al evento " + noEvento)
-        })
 
-    }
 
     return (
         <div>
@@ -88,7 +78,7 @@ function BuscarEvento() {
                                         <Card.Text>{val.descripcion}</Card.Text>
                                         <Button
                                             onClick={() => {
-                                                SubscribeToEvent(val.noEvento, val.fecha)
+                                                SubscribeToEvent(idIntegrante, val.noEvento, fecha)
                                             }}>Inscribete al evento!</Button>
                                     </Card.Body>
                                 </Card>

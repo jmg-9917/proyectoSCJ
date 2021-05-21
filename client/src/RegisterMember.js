@@ -1,14 +1,14 @@
 
 import './App.css';
-import { useState, useRef } from 'react';
+import {useState, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { TextField, Button } from '@material-ui/core'
+import {TextField, Button} from '@material-ui/core'
 import validator from 'validator';
 import GetFormattedDate from './GetFormattedDate';
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
-import { Row, Container, Col } from 'react-bootstrap'
+import {Row, Container, Col} from 'react-bootstrap'
 const RegisterMember = () => {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");

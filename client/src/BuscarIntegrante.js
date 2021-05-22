@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+import {TextField, Button} from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 function BuscarIntegrante() {
 
@@ -22,7 +22,7 @@ function BuscarIntegrante() {
                 setIntegrantes(response.data)
             }
         }, [])
-        return () => { isMounted = false };
+        return () => {isMounted = false};
 
     })
 

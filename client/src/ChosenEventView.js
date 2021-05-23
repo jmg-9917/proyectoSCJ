@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-import {useHistory, Redirect} from 'react-router-dom';
-import {Container, Row, Col, Button} from 'react-bootstrap';
-import {TextField} from '@material-ui/core';
+import { useHistory, Redirect } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { TextField } from '@material-ui/core';
 import Map from "./Address";
 function ChosenEventView(props) {
     const history = useHistory();
     const eventInfo = props.location.state;
     const noEvento = eventInfo.noEvento;
-    const [nombre, setNombre] = useState('');
-    const [ciudad, setCiudad] = useState('');
-    const [nacional, setNacional] = useState('');
-    const [descr, setDesc] = useState('');
+    const [nombre, setNombre] = useState(eventInfo.nombreEvento);
+    const [ciudad, setCiudad] = useState(eventInfo.ciudad);
+    const [nacional, setNacional] = useState(eventInfo.nacional);
+    const [descr, setDesc] = useState(eventInfo.descripcion);
 
     function received() {
         if (eventInfo) {
             return
         }
-        else {<Redirect to='/registerDashboard' />}
+        else { <Redirect to='/registerDashboard' /> }
     }
     received()
 

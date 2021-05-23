@@ -307,6 +307,26 @@ app.put('/updateEvent', async (req, res) => {
         console.log(e)
     }
 })
+app.put('/updateMember', async (req, res) => {
+    try {
+        const idIntegrante = req.body.idIntegrante
+        const nuevoNombre = req.body.nuevoNombre
+        const nuevaCiudad = req.body.nuevaCiudad
+        const boolNacional = req.body.boolNacional
+        const nuevaDescripcion = req.body.nuevaDescripcion
+        db.query("UPDATE Eventos SET nombreEvento = ?, ciudad = ?, nacional = ?,descripcion = ? WHERE noEvento = ?", [nuevoNombre, nuevaCiudad, boolNacional, nuevaDescripcion, noEvento], (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            if (result) {
+                res.send(result)
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
 
 app.post('/getUser', async (req, res) => {
     try {

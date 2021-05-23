@@ -1,10 +1,10 @@
 
-import React, {useState, useEffect} from 'react';
-import {TextField} from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { TextField } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 function AlterEvents() {
     Axios.defaults.withCredentials = true
     const [nombreEvento, setNombreEvento] = useState('');
@@ -19,7 +19,7 @@ function AlterEvents() {
                     setEventos(response.data)
                 }
             }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
 
@@ -72,7 +72,7 @@ function AlterEvents() {
                     nacionalText = "Nacional"
 
                 }
-                else {nacionalText = "Local"}
+                else { nacionalText = "Local" }
                 return (
                     <>
                         <Card key={key} className="Card-appearence" >
@@ -84,7 +84,7 @@ function AlterEvents() {
                                 <Button onClick={() => {
                                     PassDataThrough(val.noEvento, val.nombreEvento, val.ciudad, val.nacional, val.descripcion)
                                 }}>Editar</Button>
-                                <Button onClick={() => {eliminateEvent(val.noEvento)}}>Eliminar</Button>
+                                <Button onClick={() => { eliminateEvent(val.noEvento) }}>Eliminar</Button>
 
 
                             </Card.Header>

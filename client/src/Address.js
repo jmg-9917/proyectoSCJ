@@ -1,54 +1,59 @@
-import React from "react";
-import PlacesAutocomplete, {
-    geocodeByAddress,
-    getLatLng
-} from "react-places-autocomplete";
-export default function Address() {
-    const [address, setAddress] = React.useState("");
-    const [coordinates, setCoordinates] = React.useState({
-        lat: null,
-        lng: null
-    });
+import React from 'react';
+import {GoogleMap, useJsApiLoader} from '@react-google-maps/api';
 
-    const handleSelect = async value => {
-        const results = await geocodeByAddress(value);
-        const latLng = await getLatLng(results[0]);
-        setAddress(value);
-        setCoordinates(latLng);
+function Map() {
+    const containerStyle = {
+        width: '50rem',
+        height: '30rem'
     };
+    const center = {
+        lat: 23.281909,
+        lng: -102.499577
+    };
+    const {isLoaded} = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyDSWW88ArcN4Zl4NsZmJv30ZfyzLZXWE3s"
 
-    return (
-        <div>
-            <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-            >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                        <p>Latitude: {coordinates.lat}</p>
-                        <p>Longitude: {coordinates.lng}</p>
+    })
 
-                        <input {...getInputProps({ placeholder: "Type address" })} />
+    const [map, setMap] = React.useState(null)
+    const [marker, setMarker] = React.useState({})
 
-                        <div>
-                            {loading ? <div>...loading</div> : null}
+    const onLoad = React.useCallback(function callback(map) {
+        const bounds = new window.google.maps.LatLngBounds();
+        map.fitBounds(bounds);
+        setMap(map)
 
-                            {suggestions.map(suggestion => {
-                                const style = {
-                                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                                };
+    }, [])
 
-                                return (
-                                    <div {...getSuggestionItemProps(suggestion, { style })}>
-                                        {suggestion.description}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
-            </PlacesAutocomplete>
-        </div>
-    );
+    const onUnmount = React.useCallback(function callback(map) {
+        setMap(null)
+
+    }, [])
+
+    return isLoaded ? (
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={5}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            onClick={(e) => {
+                console.log(e.latLng.lat())
+                console.log(e.latLng.lng())
+                setMarker({
+                    lat: e.latLng.lat(),
+                    lng: e.latLng.lng()
+                })
+
+                console.log(marker.lat)
+                console.log(marker.lng)
+            }}
+        >
+            { /* Child components, such as markers, info windows, etc. */}
+            <></>
+        </GoogleMap>
+
+    ) : <></>
 }
+export default Map;

@@ -51,11 +51,6 @@ const WelcomeAdminComponent = () => {
                     </Link>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                    <Link to="/registerDashboard/registerMaterials">
-                        <li>Registra materiales</li>
-                    </Link>
-                </ListGroup.Item>
-                <ListGroup.Item>
                     <Link to="/registerDashboard/registerVisit">
                         <li>Registra una visita</li>
                     </Link>

@@ -233,7 +233,7 @@ app.delete('/deleteEvent/:id', async (req, res) => {
         })
 })
 
-app.delete('/deleteIntegrante/:id', async (req, res) => {
+app.delete('/deleteMember/:id', async (req, res) => {
     console.log(req)
     const id = req.params.id
     console.log(id)

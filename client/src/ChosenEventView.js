@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Axios from 'axios';
-import { useHistory, Redirect } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { TextField } from '@material-ui/core';
-
+import {useHistory, Redirect} from 'react-router-dom';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import {TextField} from '@material-ui/core';
+import Map from "./Address";
 function ChosenEventView(props) {
     const history = useHistory();
     const eventInfo = props.location.state;
@@ -17,7 +17,7 @@ function ChosenEventView(props) {
         if (eventInfo) {
             return
         }
-        else { <Redirect to='/registerDashboard' /> }
+        else {<Redirect to='/registerDashboard' />}
     }
     received()
 
@@ -94,6 +94,7 @@ function ChosenEventView(props) {
 
                 </Row>
             </Container>
+            <Map />
         </>
     )
 }

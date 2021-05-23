@@ -1,9 +1,9 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import {useHistory} from 'react-router-dom';
-import {TextField} from '@material-ui/core';
-import {Button, Fade, Card} from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { TextField } from '@material-ui/core';
+import { Button, Fade, Card } from 'react-bootstrap';
 function AlterMembers() {
 
 
@@ -23,7 +23,7 @@ function AlterMembers() {
                 setIntegrantes(response.data)
             }
         }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {GoogleMap, useJsApiLoader} from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 function Map() {
     const containerStyle = {
@@ -10,15 +10,16 @@ function Map() {
         lat: 23.281909,
         lng: -102.499577
     };
-    const {isLoaded} = useJsApiLoader({
+    const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: "AIzaSyDSWW88ArcN4Zl4NsZmJv30ZfyzLZXWE3s"
 
     })
-
     const [map, setMap] = React.useState(null)
     const [marker, setMarker] = React.useState({})
+    function placeMarker(location) {
 
+    }
     const onLoad = React.useCallback(function callback(map) {
         const bounds = new window.google.maps.LatLngBounds();
         map.fitBounds(bounds);
@@ -50,10 +51,15 @@ function Map() {
                 console.log(marker.lng)
             }}
         >
-            { /* Child components, such as markers, info windows, etc. */}
-            <></>
+            {marker.map((val) => {
+                return (
+                    <Marker>
+                        )
+                        })}
+                        { /* Child components, such as markers, info windows, etc. */}
+                        <></>
         </GoogleMap>
 
-    ) : <></>
+                ) : <></>
 }
 export default Map;

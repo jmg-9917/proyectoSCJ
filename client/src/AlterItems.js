@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import EditView from './EditView';
 import AlterEvents from './AlterEvents';
 import ChosenEventView from './ChosenEventView';

@@ -77,6 +77,27 @@ App {
     flex-direction: column;
 
 }
+.row-subtitle{
+    text-align: center;
+    padding-top: 2%;
+    padding-left: 10%;
+}
+.row-button{
+    text-align: center;
+    padding-top: 2%;
+    padding-left: 47%;
+}
+
+.sub-links{
+    width: 100%;
+}
+.sub-title-placement{
+    padding-left: 6%;
+    text-align: center;
+}
+.horizontal-view{
+    display: flex;
+}
 .ListGroup{
     width: 20%;
 }

@@ -81,7 +81,13 @@ function BuscarEvento() {
                                         <Card.Text>{val.descripcion}</Card.Text>
                                         <Button
                                             onClick={() => {
-                                                SubscribeToEvent(idIntegrante, val.noEvento, val.fecha)
+                                                setSusc(!susc)
+                                                if (susc) {
+                                                    SubscribeToEvent(idIntegrante, val.noEvento, val.fecha)
+                                                }
+                                                else {
+                                                    Unsubscribe(idIntegrante, val.noEvento, val.fecha)
+                                                }
                                             }}>Inscribete al evento!</Button>
                                     </Card.Body>
                                 </Card>

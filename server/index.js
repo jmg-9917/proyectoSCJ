@@ -280,7 +280,7 @@ app.post('/unsubscribeToEvent', async (req, res) => {
     const idIntegrante = req.body.idIntegrante
     const noEvento = req.body.noEvento
     const fecha = req.body.fecha
-    db.query("DELETE FROM integrante_evento (idIntegrante,noEvento,fecha) VALUES (?,?,?)", [idIntegrante, noEvento, fecha],
+    db.query("DELETE FROM integrante_evento WHERE idIntegrante=? AND noEvento=?", [idIntegrante, noEvento],
         (err, result) => {
             if (err) { console.log(err) }
             else { res.send('Values inserted') }

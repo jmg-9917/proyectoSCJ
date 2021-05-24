@@ -91,7 +91,7 @@ app.post('/subscribedEvents', (req, res) => {
 app.post('/materialsRelatedToEvent', (req, res) => {
     const noEvento = req.body.noEvento
 
-    db.query("SELECT m.nombre,m.tipo,m.cantidad FROM materiales m, materiales_eventos me WHERE m.idMateriales = me.idMateriales AND ? = me.noEvento;", [noEvento], (err, result) => {
+    db.query("SELECT m.idMateriales, m.nombre,m.tipo,m.cantidad FROM materiales m, materiales_eventos me WHERE m.idMateriales = me.idMateriales AND ? = me.noEvento;", [noEvento], (err, result) => {
         if (err) {
             console.log(err)
         }
@@ -309,6 +309,19 @@ app.delete('/deleteMeeting/:id', async (req, res) => {
     const id = req.params.id
     console.log(id)
     db.query("DELETE FROM Juntas WHERE noJuntas = ?", id,
+        (err, result) => {
+            if (err) {
+                console.log(id)
+                console.log(err)
+            }
+            else { res.send(result) }
+        })
+})
+app.delete('/deleteMaterial/:id', async (req, res) => {
+    console.log(req)
+    const id = req.params.id
+    console.log(id)
+    db.query("DELETE FROM materiales WHERE idMateriales = ?", id,
         (err, result) => {
             if (err) {
                 console.log(id)

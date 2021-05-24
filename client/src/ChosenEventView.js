@@ -19,7 +19,7 @@ function ChosenEventView(props) {
     const [matCantidad, setMatCant] = useState(0);
     const [materiales, setMateriales] = useState([])
     const open = true
-    const materiaList = () => {
+    useEffect(() => {
         let isMounted = true;
         Axios.post("http://localhost:3002/materialsRelatedToEvent",
             {
@@ -32,7 +32,7 @@ function ChosenEventView(props) {
             }, [])
         return () => { isMounted = false };
 
-    }
+    })
     function received() {
         if (eventInfo) {
             return
@@ -53,9 +53,14 @@ function ChosenEventView(props) {
     }
     const deleteMaterial = (idMateriales) => {
         console.log(idMateriales)
+        Axios.defaults.withCredentials = true
+        Axios.delete(`http://localhost:3002/deleteMaterial/${idMateriales}`)
+        alert('Material borrado correctamente.')
     }
     const updateData = () => {
         const numNacional = substituteForNum(nacional)
+        const fechaArray = fecha.split('T')
+        const first = fechaArray[0]
         Axios.defaults.withCredentials = true
         Axios.put('http://localhost:3002/updateEvent', {
             noEvento: noEvento,
@@ -64,7 +69,7 @@ function ChosenEventView(props) {
             boolNacional: numNacional,
             nuevaDescripcion: descr,
             nuevaDireccion: direccion,
-            nuevaFecha: fecha
+            nuevaFecha: first
         })
         history.push(
             "/registerDashboard/alterItems/alterEvents"
@@ -193,7 +198,6 @@ function ChosenEventView(props) {
                     </Col>
                     <Button onClick={() => {
                         addMaterial(matNombre, matTipo, matCantidad, noEvento)
-                        materiaList()
                     }}>Agregar a evento</Button>
                 </Col>
                 <Col>
@@ -201,13 +205,14 @@ function ChosenEventView(props) {
                         return (
                             <div className="card-placement">
                                 <Fade in={open} timeout={500}>
-                                    <Card key={key} className="Card-appearence" >
+                                    <Card key={key} className="width = 5%" >
                                         <Card.Body>
                                             <Card.Title>{val.nombre}</Card.Title>
                                             <Card.Text>{val.tipo}</Card.Text>
                                             <Card.Text>{val.cantidad}</Card.Text>
                                             <Button
                                                 onClick={() => {
+                                                    console.log(val)
                                                     deleteMaterial(val.idMateriales)
                                                 }}>Eliminar material</Button>
                                         </Card.Body>

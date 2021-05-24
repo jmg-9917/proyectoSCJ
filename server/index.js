@@ -88,6 +88,20 @@ app.post('/subscribedEvents', (req, res) => {
         }
     })
 })
+app.post('/materialsRelatedToEvent', (req, res) => {
+    const noEvento = req.body.noEvento
+
+    db.query("SELECT m.nombre,m.tipo,m.cantidad FROM materiales m, materiales_eventos me WHERE m.idMateriales = me.idMateriales AND ? = me.noEvento;", [noEvento], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            console.log(result)
+            res.send(result)
+        }
+    })
+})
+
 
 
 
@@ -148,7 +162,8 @@ app.post('/createMaterial', async (req, res) => {
     const nombre = req.body.nombre
     const tipo = req.body.tipo
     const cantidad = req.body.cantidad
-
+    const noEvento = req.body.noEvento
+    let lastInsertMatId
     db.query("INSERT INTO materiales (nombre,tipo,cantidad) VALUES(?,?,?)",
         [nombre, tipo, cantidad],
         (err, result) => {
@@ -158,6 +173,21 @@ app.post('/createMaterial', async (req, res) => {
 
             }
         })
+    db.query("SELECT LAST_INSERT_ID()", (err, result) => {
+        if (err) { console.log(err) }
+        else {
+            console.log("Last inserted material id :" + result[0]["LAST_INSERT_ID()"])
+            lastInsertMatId = result[0]["LAST_INSERT_ID()"]
+            db.query("INSERT INTO materiales_eventos (noEvento,idMateriales) VALUES (?,?)", [noEvento, lastInsertMatId],
+                (err, result) => {
+                    if (err) { console.log(err) }
+                    else {
+                        console.log(result)
+                    }
+                })
+        }
+    })
+
 })
 
 app.post('/createVisit', async (req, res) => {

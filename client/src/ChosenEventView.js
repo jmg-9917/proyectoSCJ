@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useHistory, Redirect } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Fade, Card } from 'react-bootstrap';
 import { TextField } from '@material-ui/core';
 function ChosenEventView(props) {
     const history = useHistory();
@@ -17,7 +17,22 @@ function ChosenEventView(props) {
     const [matNombre, setMatNombre] = useState('');
     const [matTipo, setMatTipo] = useState('');
     const [matCantidad, setMatCant] = useState(0);
+    const [materiales, setMateriales] = useState([])
+    const open = true
+    const materiaList = () => {
+        let isMounted = true;
+        Axios.post("http://localhost:3002/materialsRelatedToEvent",
+            {
+                noEvento: noEvento
+            })
+            .then((response) => {
+                if (isMounted) {
+                    setMateriales(response.data)
+                }
+            }, [])
+        return () => { isMounted = false };
 
+    }
     function received() {
         if (eventInfo) {
             return
@@ -30,10 +45,14 @@ function ChosenEventView(props) {
         Axios.post('http://localhost:3002/createMaterial', {
             nombre: matNombre,
             tipo: matTipo,
-            cantidad: matCantidad
+            cantidad: matCantidad,
+            noEvento: noEvento
         }).then(() => {
             alert('Material registrado.')
         })
+    }
+    const deleteMaterial = (idMateriales) => {
+        console.log(idMateriales)
     }
     const updateData = () => {
         const numNacional = substituteForNum(nacional)
@@ -173,10 +192,31 @@ function ChosenEventView(props) {
                         ></TextField>
                     </Col>
                     <Button onClick={() => {
-                        addMaterial(matNombre, matTipo, matCantidad)
+                        addMaterial(matNombre, matTipo, matCantidad, noEvento)
+                        materiaList()
                     }}>Agregar a evento</Button>
                 </Col>
                 <Col>
+                    {materiales.map((val, key) => {
+                        return (
+                            <div className="card-placement">
+                                <Fade in={open} timeout={500}>
+                                    <Card key={key} className="Card-appearence" >
+                                        <Card.Body>
+                                            <Card.Title>{val.nombre}</Card.Title>
+                                            <Card.Text>{val.tipo}</Card.Text>
+                                            <Card.Text>{val.cantidad}</Card.Text>
+                                            <Button
+                                                onClick={() => {
+                                                    deleteMaterial(val.idMateriales)
+                                                }}>Eliminar material</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Fade>
+                            </div>
+
+                        )
+                    })}
                 </Col>
             </Row>
         </>

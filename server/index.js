@@ -275,6 +275,17 @@ app.post('/suscribeToEvent', async (req, res) => {
             else { res.send('Values inserted') }
         })
 })
+app.post('/unsubscribeToEvent', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noEvento = req.body.noEvento
+    const fecha = req.body.fecha
+    db.query("DELETE FROM integrante_evento (idIntegrante,noEvento,fecha) VALUES (?,?,?)", [idIntegrante, noEvento, fecha],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
 
 app.delete('/deleteEvent/:id', async (req, res) => {
     console.log(req)

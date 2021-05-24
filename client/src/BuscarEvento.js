@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { TextField, Fade } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import SubscribeToEvent from './Subscription';
+import SubscribeToEvent, { Unsubscribe } from './Subscription';
 import Axios from 'axios';
 import GetFormatted from './GetFormattedDate';
 function BuscarEvento() {
@@ -13,6 +13,7 @@ function BuscarEvento() {
     const [open, setOpen] = useState(true);
     const history = useHistory()
     const fecha = GetFormatted
+    const [susc, setSusc] = useState(false)
     useEffect(() => {
         let isMounted = true;
         Axios.get("http://localhost:3002/eventos")

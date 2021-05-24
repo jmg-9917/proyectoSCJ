@@ -10,6 +10,7 @@ const SubscribeToEvent = (idIntegrante, noEvento, fecha) => {
         noEvento: noEvento,
         fecha: fechaFirst
     }).then(() => {
+        alert('Registrado al evento ' + noEvento)
         console.log("Usuario" + idIntegrante + " registrado al evento " + noEvento)
     })
 }
@@ -20,7 +21,7 @@ export const Unsubscribe = (idIntegrante, noEvento, fecha) => {
         noEvento: noEvento,
         fecha: fecha
     }).then(() => {
-        alert('Unsubscribed from ' + noEvento)
+        alert('Suscripcion eliminada para el evento ' + noEvento)
     })
 }
 export default SubscribeToEvent;

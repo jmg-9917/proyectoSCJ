@@ -26,11 +26,11 @@ function BuscarPractica() {
 
 
     return (
-        <div>
+        <div className="eventos">
             <h1>Buscar practica</h1>
-            <div className="information">
-                <label>Nombre:</label>
+            <div>
                 <TextField
+                    label="Nombre"
                     type="text"
                     onChange={(event) => {
                         setNombre(event.target.value)
@@ -49,7 +49,7 @@ function BuscarPractica() {
             }).map((val, key) => {
 
                 return (
-                    <div>
+                    <div className="card-placement">
                         <Card key={key} className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.nombre}</Card.Title>

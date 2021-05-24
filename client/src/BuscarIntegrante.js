@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
 import {useHistory} from 'react-router-dom';
-import {TextField, Button} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Fade from 'react-bootstrap/Fade';
 function BuscarIntegrante() {
 
 
@@ -13,6 +15,7 @@ function BuscarIntegrante() {
     const [correo_electronico, setCorreo] = useState('');
     const [texto, setTexto] = useState("");
     const [integrantes, setIntegrantes] = useState([]);
+    const open = true
     const history = useHistory();
     useEffect(() => {
         Axios.defaults.withCredentials = true
@@ -46,11 +49,11 @@ function BuscarIntegrante() {
 
 
     return (
-        <div>
+        <div className="eventos">
             <h1>Buscar integrante</h1>
-            <div className="information">
-                <label>Nombre:</label>
+            <div>
                 <TextField
+                    label="Nombre"
                     type="text"
                     onChange={(event) => {
                         setNombre(event.target.value)
@@ -68,20 +71,22 @@ function BuscarIntegrante() {
             }).map((val, key) => {
 
                 return (
-                    <div>
-                        <Card key={val.idIntegrante} className="Card-appearence" >
-                            <Card.Body>
-                                <Card.Title>{val.nombre}</Card.Title>
-                                <Card.Text>{val.apellidos}</Card.Text>
-                                <Card.Text>{val.puesto}</Card.Text>
-                                <Button
-                                    onClick={() =>
-                                        PassDataThrough(val.idIntegrante, val.nombre, val.apellidos, val.puesto, val.telefono, val.correo_electronico, val.fechaInscripcion)
+                    <div className="card-placement">
+                        <Fade in={open} timeout={500}>
+                            <Card key={val.idIntegrante} className="Card-appearence" >
+                                <Card.Body>
+                                    <Card.Title>{val.nombre}</Card.Title>
+                                    <Card.Text>{val.apellidos}</Card.Text>
+                                    <Card.Text>{val.puesto}</Card.Text>
+                                    <Button
+                                        onClick={() =>
+                                            PassDataThrough(val.idIntegrante, val.nombre, val.apellidos, val.puesto, val.telefono, val.correo_electronico, val.fechaInscripcion)
 
-                                    }
-                                >Ver mas informacion del miembro</Button>
-                            </Card.Body>
-                        </Card>
+                                        }
+                                    >Ver mas informacion del miembro</Button>
+                                </Card.Body>
+                            </Card>
+                        </Fade>
                     </div>
                 )
             })}

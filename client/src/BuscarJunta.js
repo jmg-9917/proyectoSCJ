@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { TextField } from '@material-ui/core';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Fade } from 'react-bootstrap';
 function BuscarJunta() {
 
 
@@ -26,11 +26,11 @@ function BuscarJunta() {
 
 
     return (
-        <div>
+        <div className="eventos">
             <h1>Buscar junta</h1>
-            <div className="information">
-                <label>Nombre:</label>
+            <div>
                 <TextField
+                    label="Nombre"
                     type="text"
                     onChange={(event) => {
                         setTipo(event.target.value)
@@ -48,15 +48,17 @@ function BuscarJunta() {
             }).map((val, key) => {
 
                 return (
-                    <div key={key}>
-                        <Card className="Card-appearence" >
-                            <Card.Body>
-                                <Card.Title>{val.tipo}</Card.Title>
-                                <Card.Text>{val.fecha}</Card.Text>
-                                <Card.Text>{val.descripcion}</Card.Text>
-                                <Button>Ver mas informacion de la junta</Button>
-                            </Card.Body>
-                        </Card>
+                    <div className="card-placement" key={key}>
+                        <Fade in={true} timeout={500}>
+                            <Card className="Card-appearence" >
+                                <Card.Body>
+                                    <Card.Title>{val.tipo}</Card.Title>
+                                    <Card.Text>{val.fecha}</Card.Text>
+                                    <Card.Text>{val.descripcion}</Card.Text>
+                                    <Button>Ver mas informacion de la junta</Button>
+                                </Card.Body>
+                            </Card>
+                        </Fade>
 
                     </div>
                 )

@@ -1,8 +1,8 @@
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import {TextField} from '@material-ui/core';
-import {Card, Button} from 'react-bootstrap';
+import { TextField } from '@material-ui/core';
+import { Card, Button } from 'react-bootstrap';
 function BuscarVisitas() {
 
 
@@ -21,17 +21,17 @@ function BuscarVisitas() {
                     setVisitas(response.data)
                 }
             }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
 
 
     return (
-        <div>
-            <h1>Buscar practica</h1>
-            <div className="information">
-                <label>Nombre:</label>
+        <div className="eventos">
+            <h1>Buscar visita</h1>
+            <div>
                 <TextField
+                    label="Nombre"
                     type="text"
                     onChange={(event) => {
                         setNombre(event.target.value)
@@ -50,7 +50,7 @@ function BuscarVisitas() {
             }).map((val, key) => {
 
                 return (
-                    <div>
+                    <div className="card-placement">
                         <Card key={key} className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.nombre}</Card.Title>

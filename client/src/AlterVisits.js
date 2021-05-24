@@ -50,7 +50,7 @@ function AlterVisits() {
     }
     return (
         <div>
-            <h1>Buscar practica</h1>
+            <h1>Buscar visita</h1>
             <div className="information">
                 <label>Nombre:</label>
                 <TextField

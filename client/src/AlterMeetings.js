@@ -1,11 +1,11 @@
 import './App.css';
-import React, {useState, useEffect} from 'react';
-import {TextField} from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { TextField } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Fade from 'react-bootstrap/Fade';
 import Axios from 'axios';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 function AlterMeetings() {
     Axios.defaults.withCredentials = true
 
@@ -24,7 +24,7 @@ function AlterMeetings() {
                     setJuntas(response.data)
                 }
             }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
 
@@ -77,6 +77,7 @@ function AlterMeetings() {
                             <Card className="Card-appearence" >
                                 <Card.Body>
                                     <Card.Title>{val.tipo}</Card.Title>
+                                    <Card.Text>{val.fecha}</Card.Text>
                                     <Card.Text>{val.descripcion}</Card.Text>
                                     <Button onClick={() => {
                                         PassDataThrough(val.noJuntas, val.tipo, val.descripcion, val.fecha)

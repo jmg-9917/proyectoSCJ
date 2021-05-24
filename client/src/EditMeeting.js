@@ -1,37 +1,36 @@
-import React, { useState } from 'react';
+
+import React, {useState} from 'react';
 import Axios from 'axios';
-import { useHistory, Redirect } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { TextField } from '@material-ui/core';
-function EditVisit(props) {
+import {useHistory, Redirect} from 'react-router-dom';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import {TextField} from '@material-ui/core';
+function EditMeeting(props) {
     const history = useHistory();
-    const visitInfo = props.location.state;
-    const noVisita = visitInfo.noVisita;
-    const [nombre, setNombre] = useState(visitInfo.nombre);
-    const [categoria, setCategoria] = useState(visitInfo.categoria);
-    const [descr, setDesc] = useState(visitInfo.descripcion);
-    const [fecha, setFecha] = useState(visitInfo.fecha)
+    const meetingInfo = props.location.state;
+    const noJuntas = meetingInfo.noJuntas;
+    const [tipo, setTipo] = useState(meetingInfo.tipo);
+    const [descr, setDesc] = useState(meetingInfo.descripcion);
+    const [fecha, setFecha] = useState(meetingInfo.fecha)
     function received() {
-        if (visitInfo) {
+        if (meetingInfo) {
             return
         }
-        else { <Redirect to='/registerDashboard' /> }
+        else {<Redirect to='/registerDashboard' />}
     }
     received()
 
     const updateData = () => {
         Axios.defaults.withCredentials = true
-        Axios.put('http://localhost:3002/updateVisit', {
-            noVisita: noVisita,
-            nuevoNombre: nombre,
-            nuevaCategoria: categoria,
+        Axios.put('http://localhost:3002/updateMeeting', {
+            noJuntas: noJuntas,
+            nuevoTipo: tipo,
             nuevaDescripcion: descr,
             nuevaFecha: fecha
         })
         history.push(
-            "/registerDashboard/alterItems/alterVisits"
+            "/registerDashboard/alterItems/alterMeetings"
         )
-        alert('Visita actualizada correctamente.')
+        alert('Junta actualizada correctamente.')
 
     };
 
@@ -41,23 +40,16 @@ function EditVisit(props) {
             <Container>
                 <Row>
                     <Col xs={6}>
-                        Nombre:
-                        <TextField placeholder={visitInfo.nombre}
+                        Tipo:
+                        <TextField placeholder={meetingInfo.tipo}
                             onChange={(e) => {
-                                setNombre(e.target.value)
-                            }}></TextField>
-                    </Col>
-                    <Col xs={6}>
-                        Categoria:
-                        <TextField placeholder={visitInfo.categoria}
-                            onChange={(e) => {
-                                setCategoria(e.target.value)
+                                setTipo(e.target.value)
                             }}></TextField>
                     </Col>
                     <Row>
                         <Col xs={6}>
                             Descripcion:
-                            <TextField placeholder={visitInfo.descripcion}
+                            <TextField placeholder={meetingInfo.descripcion}
                                 onChange={(e) => {
                                     setDesc(e.target.value)
                                 }}  ></TextField>
@@ -89,4 +81,4 @@ function EditVisit(props) {
     )
 }
 
-export default EditVisit;
+export default EditMeeting;

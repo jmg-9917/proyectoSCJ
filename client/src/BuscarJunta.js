@@ -52,6 +52,7 @@ function BuscarJunta() {
                         <Card className="Card-appearence" >
                             <Card.Body>
                                 <Card.Title>{val.tipo}</Card.Title>
+                                <Card.Text>{val.fecha}</Card.Text>
                                 <Card.Text>{val.descripcion}</Card.Text>
                                 <Button>Ver mas informacion de la junta</Button>
                             </Card.Body>

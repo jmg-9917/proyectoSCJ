@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import {TextField, Fade} from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { TextField, Fade } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import SubscribeToEvent from './Subscription';
@@ -21,7 +21,7 @@ function BuscarEvento() {
                     setEventos(response.data)
                 }
             }, [])
-        return () => {isMounted = false};
+        return () => { isMounted = false };
 
     })
 
@@ -66,7 +66,7 @@ function BuscarEvento() {
                         nacionalText = "Nacional"
 
                     }
-                    else {nacionalText = "Local"}
+                    else { nacionalText = "Local" }
                     return (
                         <div className="card-placement">
                             <Fade in={open} timeout={500}>

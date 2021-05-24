@@ -89,6 +89,8 @@ app.post('/subscribedEvents', (req, res) => {
     })
 })
 
+
+
 app.get('/integrantes', async (req, res) => {
     db.query("SELECT * FROM Integrante",
         (err, result) => {
@@ -134,6 +136,21 @@ app.post('/createLabReport', async (req, res) => {
 
     db.query("INSERT INTO practicas (nombre,descripcion,categoria) VALUES(?,?,?)",
         [nombre, descripcion, categoria],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else {
+                res.send(result)
+
+            }
+        })
+})
+app.post('/createMaterial', async (req, res) => {
+    const nombre = req.body.nombre
+    const tipo = req.body.tipo
+    const cantidad = req.body.cantidad
+
+    db.query("INSERT INTO materiales (nombre,tipo,cantidad) VALUES(?,?,?)",
+        [nombre, tipo, cantidad],
         (err, result) => {
             if (err) { console.log(err) }
             else {
@@ -414,6 +431,28 @@ app.put('/updateVisit', async (req, res) => {
 
         console.log(noVisita)
         db.query("UPDATE visitas SET nombre = ?, categoria = ?, descripcion = ?, fecha = ? WHERE noVisita = ?", [nuevoNombre, nuevaCategoria, nuevaDescripcion, nuevaFecha, noVisita], (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            if (result) {
+                console.log(result)
+                res.send(result)
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
+app.put('/updateMeeting', async (req, res) => {
+    try {
+        const noJuntas = req.body.noJuntas
+        const nuevoTipo = req.body.nuevoTipo
+        const nuevaDescripcion = req.body.nuevaDescripcion
+        const nuevaFecha = req.body.nuevaFecha
+
+        console.log(noJuntas)
+        db.query("UPDATE juntas SET tipo = ?, descripcion = ?, fecha = ? WHERE noJuntas = ?", [nuevoTipo, nuevaDescripcion, nuevaFecha, noJuntas], (err, result) => {
             if (err) {
                 console.log(err)
             }

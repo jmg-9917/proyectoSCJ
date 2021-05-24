@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
+
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { TextField } from '@material-ui/core';
-import { Card, Button } from 'react-bootstrap';
-function BuscarPractica() {
+import {TextField} from '@material-ui/core';
+import {Card, Button} from 'react-bootstrap';
+function BuscarVisitas() {
 
 
     const [nombre, setNombre] = useState("");
     const [descripcion, setDesc] = useState("");
     const [categoria, setCat] = useState("");
+    const [fecha, setFecha] = useState('');
 
-
-    const [practicas, setPracticas] = useState([]);
+    const [visitas, setVisitas] = useState([]);
 
     useEffect(() => {
         let isMounted = true;
-        Axios.get("http://localhost:3002/practicas")
+        Axios.get("http://localhost:3002/visitas")
             .then((response) => {
                 if (isMounted) {
-                    setPracticas(response.data)
+                    setVisitas(response.data)
                 }
             }, [])
-        return () => { isMounted = false };
+        return () => {isMounted = false};
 
     })
 
@@ -39,7 +40,7 @@ function BuscarPractica() {
                     }}
                 />
             </div>
-            {practicas.filter((val) => {
+            {visitas.filter((val) => {
                 if (nombre === '' || descripcion === '' || categoria === '') {
                     return val
                 }
@@ -55,9 +56,8 @@ function BuscarPractica() {
                                 <Card.Title>{val.nombre}</Card.Title>
                                 <Card.Text>{val.categoria}</Card.Text>
                                 <Card.Text>{val.descripcion}</Card.Text>
-                                <Card.Text>{val.fecha}</Card.Text>
 
-                                <Button>Ver mas informacion de la junta</Button>
+                                <Button>Ver mas informacion de la practica</Button>
                             </Card.Body>
                         </Card>
 
@@ -67,5 +67,5 @@ function BuscarPractica() {
         </div>
     )
 }
-export default BuscarPractica;
+export default BuscarVisitas;
 

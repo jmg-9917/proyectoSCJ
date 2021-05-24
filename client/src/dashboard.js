@@ -10,6 +10,7 @@ import MostrarEventos from './MostrarEventos';
 import WelcomeComponent from './WelcomeComponent';
 import UserProfileView from './UserProfileView';
 import ChosenUserView from './ChosenUserView';
+import BuscarVisitas from './BuscarVisita';
 import {Navbar, Nav} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 function Dashboard() {
@@ -51,6 +52,7 @@ function Dashboard() {
                         <Route path="/dashboard/mostrarEventos" component={MostrarEventos} />
                         <Route path="/dashboard/buscarPractica" component={BuscarPractica} />
                         <Route path="/dashboard/buscarJunta" component={BuscarJunta} />
+                        <Route path="/dashboard/buscarVisita" component={BuscarVisitas} />
                         <Route path="/dashboard/verPerfil" component={UserProfileView} />
                     </Router>
                 </div>

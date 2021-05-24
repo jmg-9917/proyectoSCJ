@@ -1,8 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
-import { useState } from 'react';
-import { useHistory, Link, Redirect } from 'react-router-dom';
-import { ListGroup } from 'react-bootstrap';
+import {useState} from 'react';
+import {useHistory, Link, Redirect} from 'react-router-dom';
+import {ListGroup} from 'react-bootstrap';
 
 function WelcomeComponent() {
     const [nombre, setNombre] = useState("");
@@ -51,12 +51,12 @@ function WelcomeComponent() {
                         <li>Buscar practica</li>
                     </Link>
                 </ListGroup.Item >
-
                 <ListGroup.Item >
-                    <Link to="/dashboard/mostrarEventos">
-                        <li>Mostrar eventos</li>
+                    <Link to="/dashboard/buscarVisita">
+                        <li>Buscar visita</li>
                     </Link>
-                </ListGroup.Item>
+                </ListGroup.Item >
+
             </ListGroup >
         </div>
 

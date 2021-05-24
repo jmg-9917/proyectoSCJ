@@ -1,44 +1,43 @@
-
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import { TextField } from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
+import {TextField} from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Fade from 'react-bootstrap/Fade';
 import Axios from 'axios';
-import { useHistory } from 'react-router-dom';
-function AlterLabReports() {
+import {useHistory} from 'react-router-dom';
+function AlterVisits() {
     Axios.defaults.withCredentials = true
-    const [practicas, setPracticas] = useState([]);
-    const [nombre, setNombre] = useState("");
+    const [nombre, setNombre] = useState('');
+    const [visitas, setVisitas] = useState([]);
     const [descripcion, setDesc] = useState("");
     const [categoria, setCat] = useState("");
     const history = useHistory();
     useEffect(() => {
         let isMounted = true;
         Axios.defaults.withCredentials = true
-        Axios.get("http://localhost:3002/practicas")
+        Axios.get("http://localhost:3002/visitas")
             .then((response) => {
                 if (isMounted) {
-                    setPracticas(response.data)
+                    setVisitas(response.data)
                 }
             }, [])
-        return () => { isMounted = false };
+        return () => {isMounted = false};
 
     })
 
     const eliminatePractica = (id) => {
         Axios.defaults.withCredentials = true
-        Axios.delete(`http://localhost:3002/deleteLabReport/${id}`)
-        alert('Practica borrada correctamente.')
-        history.push('/registerDashboard/alterItems/alterLabReports')
+        Axios.delete(`http://localhost:3002/deleteVisit/${id}`)
+        alert('Visita borrada correctamente.')
+        history.push('/registerDashboard/alterItems/alterVisits')
     }
 
-    const PassDataThrough = (noPractica, nombre, categoria, descripcion, fecha) => {
+    const PassDataThrough = (noVisita, nombre, categoria, descripcion, fecha) => {
         history.push({
-            pathname: "/registerDashboard/alterItems/editLabReport",
+            pathname: "/registerDashboard/alterItems/editVisit",
             state: {
-                noPractica: noPractica,
+                noVisita: noVisita,
                 nombre: nombre,
                 categoria: categoria,
                 fecha: fecha,
@@ -46,7 +45,7 @@ function AlterLabReports() {
             }
 
         })
-        console.log(noPractica)
+        console.log(noVisita)
         console.log(nombre)
     }
     return (
@@ -63,7 +62,7 @@ function AlterLabReports() {
                     }}
                 />
             </div>
-            {practicas.filter((val) => {
+            {visitas.filter((val) => {
                 if (nombre === '' || descripcion === '' || categoria === '') {
                     return val
                 }
@@ -82,10 +81,10 @@ function AlterLabReports() {
                                 <Card.Text>{val.descripcion}</Card.Text>
 
                                 <Button onClick={() => {
-                                    PassDataThrough(val.noPractica, val.nombre, val.categoria, val.descripcion, val.fecha)
+                                    PassDataThrough(val.noVisita, val.nombre, val.categoria, val.descripcion, val.fecha)
                                 }}>Editar</Button>
                                 <Button onClick={() => {
-                                    eliminatePractica(val.noPractica)
+                                    eliminatePractica(val.noVisita)
                                 }}>Eliminar</Button>
                             </Card.Body>
                         </Card>
@@ -97,4 +96,4 @@ function AlterLabReports() {
     )
 
 }
-export default AlterLabReports;
+export default AlterVisits;

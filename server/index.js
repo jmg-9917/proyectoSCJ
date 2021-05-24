@@ -55,6 +55,16 @@ app.get('/juntas', (req, res) => {
         }
     })
 })
+app.get('/visitas', (req, res) => {
+    db.query("SELECT * FROM visitas", (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
 
 app.get('/eventos', (req, res) => {
     db.query("SELECT * FROM Eventos", (err, result) => {
@@ -381,6 +391,29 @@ app.put('/updateLabReport', async (req, res) => {
 
         console.log(noPractica)
         db.query("UPDATE practicas SET nombre = ?, categoria = ?, descripcion = ?, fecha = ? WHERE noPractica = ?", [nuevoNombre, nuevaCategoria, nuevaDescripcion, nuevaFecha, noPractica], (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            if (result) {
+                console.log(result)
+                res.send(result)
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
+app.put('/updateVisit', async (req, res) => {
+    try {
+        const noVisita = req.body.noVisita
+        const nuevoNombre = req.body.nuevoNombre
+        const nuevaCategoria = req.body.nuevaCategoria
+        const nuevaDescripcion = req.body.nuevaDescripcion
+        const nuevaFecha = req.body.nuevaFecha
+
+        console.log(noVisita)
+        db.query("UPDATE visitas SET nombre = ?, categoria = ?, descripcion = ?, fecha = ? WHERE noVisita = ?", [nuevoNombre, nuevaCategoria, nuevaDescripcion, nuevaFecha, noVisita], (err, result) => {
             if (err) {
                 console.log(err)
             }

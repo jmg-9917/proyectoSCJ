@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import EditView from './EditView';
 import AlterEvents from './AlterEvents';
 import AlterLabReports from './AlterLabReports';
+import AlterVisits from './AlterVisits';
 import AlterMeetings from './AlterMeetings';
 import EditUserInfo from './EditUserInfo';
+import EditVisit from './EditVisit';
 import EditLabReports from './EditLabReports';
 import ChosenEventView from './ChosenEventView';
 import AlterMembers from './AlterMembers';
@@ -20,7 +22,8 @@ function AlterItems() {
                 <Route path="/registerDashboard/alterItems/alterLabReports" component={AlterLabReports} />
                 <Route path="/registerDashboard/alterItems/editLabReport" component={EditLabReports} />
                 <Route path="/registerDashboard/alterItems/alterMeetings" component={AlterMembers} />
-                <Route path="/registerDashboard/alterItems/alterVisits" component={AlterMembers} />
+                <Route path="/registerDashboard/alterItems/alterVisits" component={AlterVisits} />
+                <Route path="/registerDashboard/alterItems/editVisit" component={EditVisit} />
             </Router>
         </div>
 

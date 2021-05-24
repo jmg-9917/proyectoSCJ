@@ -76,6 +76,42 @@ app.get('/eventos', (req, res) => {
         }
     })
 })
+app.post('/subscribedMeetings', (req, res) => {
+    const idIntegrante = req.body.idIntegrante
+
+    db.query("SELECT DISTINCT j.tipo FROM juntas j, integrante_juntas ij WHERE j.noJuntas = ij.noJunta AND ? = ij.idIntegrante;", [idIntegrante], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
+app.post('/subscribedLabReports', (req, res) => {
+    const idIntegrante = req.body.idIntegrante
+
+    db.query("SELECT DISTINCT p.nombre FROM practicas p, integrante_practica ip WHERE p.noPractica = ip.noPractica AND ? = ip.idIntegrante;", [idIntegrante], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
+app.post('/subscribedVisits', (req, res) => {
+    const idIntegrante = req.body.idIntegrante
+
+    db.query("SELECT DISTINCT v.nombre FROM visitas v, integrante_visitas iv WHERE v.noVisita = iv.noVisita AND ? = iv.idIntegrante;", [idIntegrante], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        else {
+            res.send(result)
+        }
+    })
+})
 app.post('/subscribedEvents', (req, res) => {
     const idIntegrante = req.body.idIntegrante
 
@@ -264,6 +300,40 @@ app.post('/createEvent', async (req, res) => {
     );
 });
 
+app.post('/suscribeToMeeting', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noJuntas = req.body.noJuntas
+    const fecha = req.body.fecha
+    db.query("INSERT INTO integrante_juntas (idIntegrante,noJunta,fecha) VALUES (?,?,?)", [idIntegrante, noJuntas, fecha],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
+
+app.post('/suscribeToLabReport', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noPractica = req.body.noPractica
+    const fecha = req.body.fecha
+    db.query("INSERT INTO integrante_practica (idIntegrante,noPractica,fecha) VALUES (?,?,?)", [idIntegrante, noPractica, fecha],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
+app.post('/suscribeToVisit', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noVisita = req.body.noVisita
+    const fecha = req.body.fecha
+    db.query("INSERT INTO integrante_visitas (idIntegrante,noVisita,fecha) VALUES (?,?,?)", [idIntegrante, noVisita, fecha],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
 app.post('/suscribeToEvent', async (req, res) => {
     console.log(req)
     const idIntegrante = req.body.idIntegrante
@@ -281,6 +351,39 @@ app.post('/unsubscribeToEvent', async (req, res) => {
     const noEvento = req.body.noEvento
     const fecha = req.body.fecha
     db.query("DELETE FROM integrante_evento WHERE idIntegrante=? AND noEvento=?", [idIntegrante, noEvento],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
+app.post('/unsubscribeToVisit', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noVisita = req.body.noVisita
+    const fecha = req.body.fecha
+    db.query("DELETE FROM integrante_visitas WHERE idIntegrante=? AND noVisita=?", [idIntegrante, noVisita],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
+app.post('/unsubscribeToMeeting', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noJunta = req.body.noJunta
+    const fecha = req.body.fecha
+    db.query("DELETE FROM integrante_juntas WHERE idIntegrante=? AND noJunta=?", [idIntegrante, noJunta],
+        (err, result) => {
+            if (err) { console.log(err) }
+            else { res.send('Values inserted') }
+        })
+})
+app.post('/unsubscribeToLabReport', async (req, res) => {
+    console.log(req)
+    const idIntegrante = req.body.idIntegrante
+    const noPractica = req.body.noPractica
+    const fecha = req.body.fecha
+    db.query("DELETE FROM integrante_practica WHERE idIntegrante=? AND noPractica=?", [idIntegrante, noPractica],
         (err, result) => {
             if (err) { console.log(err) }
             else { res.send('Values inserted') }

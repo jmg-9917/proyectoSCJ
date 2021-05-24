@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { TextField } from '@material-ui/core';
 import { Card, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { SubscribeToVisit, UnsubscribeToVisit } from './Subscription';
 function BuscarVisitas() {
 
 
@@ -10,8 +12,24 @@ function BuscarVisitas() {
     const [descripcion, setDesc] = useState("");
     const [categoria, setCat] = useState("");
     const [fecha, setFecha] = useState('');
-
+    const [idIntegrante, setIdIntegrante] = useState('')
     const [visitas, setVisitas] = useState([]);
+    const history = useHistory()
+    const [susc, setSusc] = useState(false)
+    function UserFound() {
+        Axios.get("http://localhost:3002/login").then((response) => {
+            if (response.data.LoggedIn) {
+                console.log(response.data)
+                setIdIntegrante(response.data.user[0][0].idIntegrante)
+            }
+            if (response.data.LoggedIn === false || response.data.user.length === 0) {
+                history.push('/login')
+                window.location.reload()
+            }
+        })
+    }
+    UserFound()
+
 
     useEffect(() => {
         let isMounted = true;
@@ -57,7 +75,16 @@ function BuscarVisitas() {
                                 <Card.Text>{val.categoria}</Card.Text>
                                 <Card.Text>{val.descripcion}</Card.Text>
 
-                                <Button>Ver mas informacion de la practica</Button>
+                                <Button
+                                    onClick={() => {
+                                        setSusc(!susc)
+                                        if (susc) {
+                                            SubscribeToVisit(idIntegrante, val.noVisita, val.fecha)
+                                        }
+                                        else {
+                                            UnsubscribeToVisit(idIntegrante, val.noVisita, val.fecha)
+                                        }
+                                    }}>Inscribete</Button>
                             </Card.Body>
                         </Card>
 

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { TextField, Fade } from '@material-ui/core';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import SubscribeToEvent, { Unsubscribe } from './Subscription';
+import SubscribeToEvent, { UnsubscribeToEvent } from './Subscription';
 import Axios from 'axios';
 import GetFormatted from './GetFormattedDate';
 function BuscarEvento() {
@@ -86,7 +86,7 @@ function BuscarEvento() {
                                                     SubscribeToEvent(idIntegrante, val.noEvento, val.fecha)
                                                 }
                                                 else {
-                                                    Unsubscribe(idIntegrante, val.noEvento, val.fecha)
+                                                    UnsubscribeToEvent(idIntegrante, val.noEvento, val.fecha)
                                                 }
                                             }}>Inscribete al evento!</Button>
                                     </Card.Body>

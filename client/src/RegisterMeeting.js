@@ -3,7 +3,8 @@ import './App.css';
 import {useState, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import {TextField, Button} from '@material-ui/core'
+import {TextField} from '@material-ui/core';
+import {Button} from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
 const RegisterMeeting = () => {
     const [tipo, setTipo] = useState("");
@@ -47,7 +48,7 @@ const RegisterMeeting = () => {
 
     return (
         <div>
-            <form id="integrante-form" className="information">
+            <form id="integrante-form" className="mainDisplay">
                 <h2>Registrar junta</h2>
                 <label>Tipo de junta:</label>
                 <TextField

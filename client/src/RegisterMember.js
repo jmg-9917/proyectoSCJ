@@ -1,14 +1,14 @@
 
 import './App.css';
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import Axios from 'axios'
 import React from 'react';
-import {TextField, Button} from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 import validator from 'validator';
 import GetFormattedDate from './GetFormattedDate';
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
-import {Row, Container, Col} from 'react-bootstrap'
+import { Row, Container, Col } from 'react-bootstrap'
 const RegisterMember = () => {
     const [nombre, setNombre] = useState("");
     const [apellidos, setApellidos] = useState("");
@@ -161,6 +161,7 @@ const RegisterMember = () => {
                         <Col xs={5} md={4}>
                             <label>Nombre:</label>
                             <TextField
+                                helperText={nombreError}
                                 type="text"
                                 onChange={(event) => {
                                     setNombre(event.target.value)
@@ -172,6 +173,7 @@ const RegisterMember = () => {
                             <label>Apellidos</label>
                             <TextField
                                 type="text"
+                                helperText={apellidosError}
                                 onChange={(event) => {
                                     setApellidos(event.target.value)
 
@@ -184,6 +186,7 @@ const RegisterMember = () => {
                             <label>Telefono:</label>
                             <TextField
                                 type="number"
+                                helperText={telefonoError}
                                 onChange={(event) => {
                                     setTelefono(event.target.value)
 
@@ -194,6 +197,7 @@ const RegisterMember = () => {
                             <label>Correo electronico:</label>
                             <TextField
                                 type="text"
+                                helperText={correoError}
                                 onChange={(event) => {
                                     setCorreo(event.target.value)
 
@@ -206,6 +210,7 @@ const RegisterMember = () => {
                             <label>Contraseña:</label>
                             <TextField
                                 type="password"
+                                helperText={passwordError}
                                 onChange={(event) => {
                                     setPassword(event.target.value)
 
@@ -216,9 +221,9 @@ const RegisterMember = () => {
                             <label>Confirme contraseña:</label>
                             <TextField
                                 type="password"
+                                helperText={passwordConfirmationError}
                                 onChange={(event) => {
                                     setPasswordConfirmation(event.target.value)
-
                                 }}
                             />
                         </Col>
@@ -230,6 +235,7 @@ const RegisterMember = () => {
                             <label>Puesto:</label>
                             <TextField
                                 type="text"
+                                helperText={puestoError}
                                 onChange={(event) => {
                                     setPuesto(event.target.value)
 

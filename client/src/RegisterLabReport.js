@@ -3,7 +3,8 @@ import './App.css';
 import { useState, useRef } from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import { TextField } from '@material-ui/core';
+import { Button } from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
 const RegisterPractica = () => {
     const [nombre, setNombre] = useState("");
@@ -52,7 +53,7 @@ const RegisterPractica = () => {
 
     return (
         <div>
-            <form id="integrante-form" className="information">
+            <form id="integrante-form" className="mainDisplay">
                 <h2>Registrar practica</h2>
                 <label>Nombre de la practica:</label>
                 <TextField

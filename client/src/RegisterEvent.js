@@ -1,13 +1,12 @@
 
 import './App.css';
-import { useState, useRef } from 'react';
+import {useState, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { TextField, Button, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import {TextField, Button, RadioGroup, FormControlLabel, Radio} from '@material-ui/core'
 import ReCAPTCHA from 'react-google-recaptcha';
 import ShowAlert from './Flash-message-component';
-import Map from './Address';
-import { Container, Row, Col } from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 const RegisterEvent = () => {
     const [nombreEvento, setNombreEvento] = useState("");
     const [ciudad, setCiudad] = useState("");
@@ -131,9 +130,6 @@ const RegisterEvent = () => {
                                 onExpired={e => setToken("")}
                                 ref={reCaptcha}
                             ></ReCAPTCHA>
-                        </Row>
-                        <Row className="row">
-                            <Map />
                         </Row>
                         <Row className="row-subtitle">
                             <h2>Publica el evento para que los integrantes puedan suscribirse</h2>

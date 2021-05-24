@@ -233,6 +233,46 @@ app.delete('/deleteEvent/:id', async (req, res) => {
         })
 })
 
+
+app.delete('/deleteLabReport/:id', async (req, res) => {
+    console.log(req)
+    const id = req.params.id
+    console.log(id)
+    db.query("DELETE FROM Practicas WHERE noPractica = ?", id,
+        (err, result) => {
+            if (err) {
+                console.log(id)
+                console.log(err)
+            }
+            else { res.send(result) }
+        })
+})
+app.delete('/deleteMeeting/:id', async (req, res) => {
+    console.log(req)
+    const id = req.params.id
+    console.log(id)
+    db.query("DELETE FROM Juntas WHERE noJuntas = ?", id,
+        (err, result) => {
+            if (err) {
+                console.log(id)
+                console.log(err)
+            }
+            else { res.send(result) }
+        })
+})
+app.delete('/deleteVisit/:id', async (req, res) => {
+    console.log(req)
+    const id = req.params.id
+    console.log(id)
+    db.query("DELETE FROM Visitas WHERE noVisita = ?", id,
+        (err, result) => {
+            if (err) {
+                console.log(id)
+                console.log(err)
+            }
+            else { res.send(result) }
+        })
+})
 app.delete('/deleteMember/:id', async (req, res) => {
     console.log(req)
     const id = req.params.id
@@ -292,9 +332,11 @@ app.put('/updateEvent', async (req, res) => {
         const noEvento = req.body.noEvento
         const nuevoNombre = req.body.nuevoNombre
         const nuevaCiudad = req.body.nuevaCiudad
+        const nuevaDireccion = req.body.nuevaDireccion
+        const nuevaFecha = req.body.nuevaFecha
         const boolNacional = req.body.boolNacional
         const nuevaDescripcion = req.body.nuevaDescripcion
-        db.query("UPDATE Eventos SET nombreEvento = ?, ciudad = ?, nacional = ?,descripcion = ? WHERE noEvento = ?", [nuevoNombre, nuevaCiudad, boolNacional, nuevaDescripcion, noEvento], (err, result) => {
+        db.query("UPDATE Eventos SET nombreEvento = ?, ciudad = ?, nacional = ?,direccion = ?, fecha = ?,descripcion = ? WHERE noEvento = ?", [nuevoNombre, nuevaCiudad, boolNacional, nuevaDireccion, nuevaFecha, nuevaDescripcion, noEvento], (err, result) => {
             if (err) {
                 console.log(err)
             }
@@ -311,14 +353,39 @@ app.put('/updateMember', async (req, res) => {
     try {
         const idIntegrante = req.body.idIntegrante
         const nuevoNombre = req.body.nuevoNombre
-        const nuevaCiudad = req.body.nuevaCiudad
-        const boolNacional = req.body.boolNacional
-        const nuevaDescripcion = req.body.nuevaDescripcion
-        db.query("UPDATE Eventos SET nombreEvento = ?, ciudad = ?, nacional = ?,descripcion = ? WHERE noEvento = ?", [nuevoNombre, nuevaCiudad, boolNacional, nuevaDescripcion, noEvento], (err, result) => {
+        const nuevaApellidos = req.body.nuevaApellidos
+        const nuevoPuesto = req.body.nuevoPuesto
+
+        console.log(idIntegrante)
+        db.query("UPDATE integrante SET nombre = ?, apellidos = ?, puesto = ? WHERE idIntegrante = ?", [nuevoNombre, nuevaApellidos, nuevoPuesto, idIntegrante], (err, result) => {
             if (err) {
                 console.log(err)
             }
             if (result) {
+                console.log(result)
+                res.send(result)
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
+app.put('/updateLabReport', async (req, res) => {
+    try {
+        const noPractica = req.body.noPractica
+        const nuevoNombre = req.body.nuevoNombre
+        const nuevaCategoria = req.body.nuevaCategoria
+        const nuevaDescripcion = req.body.nuevaDescripcion
+        const nuevaFecha = req.body.nuevaFecha
+
+        console.log(noPractica)
+        db.query("UPDATE practicas SET nombre = ?, categoria = ?, descripcion = ?, fecha = ? WHERE noPractica = ?", [nuevoNombre, nuevaCategoria, nuevaDescripcion, nuevaFecha, noPractica], (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+            if (result) {
+                console.log(result)
                 res.send(result)
             }
         })

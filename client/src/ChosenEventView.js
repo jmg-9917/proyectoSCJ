@@ -3,7 +3,6 @@ import Axios from 'axios';
 import { useHistory, Redirect } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { TextField } from '@material-ui/core';
-import Map from "./Address";
 function ChosenEventView(props) {
     const history = useHistory();
     const eventInfo = props.location.state;
@@ -12,7 +11,8 @@ function ChosenEventView(props) {
     const [ciudad, setCiudad] = useState(eventInfo.ciudad);
     const [nacional, setNacional] = useState(eventInfo.nacional);
     const [descr, setDesc] = useState(eventInfo.descripcion);
-
+    const [direccion, setDireccion] = useState(eventInfo.direccion)
+    const [fecha, setFecha] = useState(eventInfo.fecha)
     function received() {
         if (eventInfo) {
             return
@@ -29,7 +29,9 @@ function ChosenEventView(props) {
             nuevoNombre: nombre,
             nuevaCiudad: ciudad,
             boolNacional: numNacional,
-            nuevaDescripcion: descr
+            nuevaDescripcion: descr,
+            nuevaDireccion: direccion,
+            nuevaFecha: fecha
         })
         history.push(
             "/registerDashboard/alterItems/alterEvents"
@@ -52,6 +54,17 @@ function ChosenEventView(props) {
         return 0
     };
 
+    const formatDate = (date) => {
+        const originalDate = date.split('-');
+        let reversedArr = originalDate.reverse()
+        let defaultValue = [];
+        reversedArr.map((val) => {
+            defaultValue.push(val)
+        })
+        console.log(defaultValue.join(',').replace(/,/g, '/').split())
+        return defaultValue[0]
+    }
+
     return (
         <>
             <Container>
@@ -71,6 +84,13 @@ function ChosenEventView(props) {
                             }}></TextField>
                     </Col>
                     <Col xs={6}>
+                        Direccion:
+                        <TextField placeholder={eventInfo.direccion}
+                            onChange={(e) => {
+                                setDireccion(e.target.value)
+                            }}></TextField>
+                    </Col>
+                    <Col xs={6}>
                         Nacional:
                         <TextField placeholder={substituteForText(eventInfo.nacional)}
                             onChange={(e) => {
@@ -87,6 +107,22 @@ function ChosenEventView(props) {
                                 }}  ></TextField>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col xs={6}>
+                            Fecha:
+                            <TextField
+                                id="date"
+                                type="date"
+                                onChange={(e) => {
+                                    setFecha(e.target.value)
+                                    console.log(fecha)
+                                }}
+                                defaultValue={formatDate(eventInfo.fecha)}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />                         </Col>
+                    </Row>
                     <Button onClick={() => {
                         updateData()
                     }}>Actualizar</Button>
@@ -94,7 +130,6 @@ function ChosenEventView(props) {
 
                 </Row>
             </Container>
-            <Map />
         </>
     )
 }

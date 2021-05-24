@@ -74,11 +74,13 @@ function BuscarEvento() {
                                     <Card.Body>
                                         <Card.Title>{val.nombreEvento}</Card.Title>
                                         <Card.Text>{val.ciudad}</Card.Text>
+                                        <Card.Text>{val.direccion}</Card.Text>
                                         <Card.Text>{nacionalText}</Card.Text>
+                                        <Card.Text>{val.fecha}</Card.Text>
                                         <Card.Text>{val.descripcion}</Card.Text>
                                         <Button
                                             onClick={() => {
-                                                SubscribeToEvent(idIntegrante, val.noEvento, fecha)
+                                                SubscribeToEvent(idIntegrante, val.noEvento, val.fecha)
                                             }}>Inscribete al evento!</Button>
                                     </Card.Body>
                                 </Card>

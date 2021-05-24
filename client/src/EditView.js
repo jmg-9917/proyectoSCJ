@@ -7,14 +7,14 @@ function EditView() {
     return (
         <>
             <div className="sub-title-placement">
-            <h1>Algo no está bien? Edita lo que necesites.</h1>
+                <h1>Algo no está bien? Edita lo que necesites.</h1>
             </div>
             <Container>
                 <ListGroup>
                     <Row>
                         <Col>
                             <ListGroup.Item className="sub-links">
-                                <Link  to="/registerDashboard/alterItems/alterEvents">
+                                <Link to="/registerDashboard/alterItems/alterEvents">
                                     <li >Editar eventos</li>
                                 </Link>
                             </ListGroup.Item>
@@ -23,6 +23,27 @@ function EditView() {
                             <ListGroup.Item className="sub-links">
                                 <Link to="/registerDashboard/alterItems/alterMembers">
                                     <li >Editar miembros</li>
+                                </Link>
+                            </ListGroup.Item>
+                        </Col>
+                        <Col>
+                            <ListGroup.Item className="sub-links">
+                                <Link to="/registerDashboard/alterItems/alterLabReports">
+                                    <li >Editar practicas</li>
+                                </Link>
+                            </ListGroup.Item>
+                        </Col>
+                        <Col>
+                            <ListGroup.Item className="sub-links">
+                                <Link to="/registerDashboard/alterItems/alterVisits">
+                                    <li >Editar visitas</li>
+                                </Link>
+                            </ListGroup.Item>
+                        </Col>
+                        <Col>
+                            <ListGroup.Item className="sub-links">
+                                <Link to="/registerDashboard/alterItems/alterMeetings">
+                                    <li >Editar juntas</li>
                                 </Link>
                             </ListGroup.Item>
                         </Col>

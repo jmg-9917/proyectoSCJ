@@ -1,8 +1,8 @@
 import './App.css';
 import Axios from 'axios'
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { ListGroup } from 'react-bootstrap-v5';
+import {Link, useHistory} from 'react-router-dom';
+import {ListGroup} from 'react-bootstrap-v5';
 const WelcomeAdminComponent = () => {
     const history = useHistory();
     function userFound() {

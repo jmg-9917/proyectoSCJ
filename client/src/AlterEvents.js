@@ -31,13 +31,15 @@ function AlterEvents() {
         history.push('/registerDashboard/alterItems/alterEvents')
     }
 
-    const PassDataThrough = (noEvento, nombreEvento, ciudad, nacional, descripcion) => {
+    const PassDataThrough = (noEvento, nombreEvento, ciudad, direccion, fecha, nacional, descripcion) => {
         history.push({
             pathname: "/registerDashboard/alterItems/editEvent",
             state: {
                 noEvento: noEvento,
                 nombreEvento: nombreEvento,
                 ciudad: ciudad,
+                direccion: direccion,
+                fecha: fecha,
                 nacional: nacional,
                 descripcion: descripcion
             }
@@ -83,10 +85,12 @@ function AlterEvents() {
                                         <Card.Header>
                                             <Card.Title>{val.nombreEvento}</Card.Title>
                                             <Card.Text>Ciudad: {val.ciudad}</Card.Text>
+                                            <Card.Text> Direccion: {val.direccion}</Card.Text>
                                             <Card.Text>Nacional o local: {nacionalText}</Card.Text>
+                                            <Card.Text> Fecha: {val.fecha}</Card.Text>
                                             <Card.Text> Descripcion: {val.descripcion}</Card.Text>
                                             <Button onClick={() => {
-                                                PassDataThrough(val.noEvento, val.nombreEvento, val.ciudad, val.nacional, val.descripcion)
+                                                PassDataThrough(val.noEvento, val.nombreEvento, val.ciudad, val.direccion, val.fecha, val.nacional, val.descripcion)
                                             }}>Editar</Button>
                                             <Button onClick={() => { eliminateEvent(val.noEvento) }}>Eliminar</Button>
 

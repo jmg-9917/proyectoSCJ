@@ -1,5 +1,5 @@
 import './App.css';
-import { Link, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {Link, BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import WelcomeAdminComponent from './WelcomeAdminComponent';
 import RegisterMember from './RegisterMember';
 import RegisterEvent from './RegisterEvent';
@@ -8,8 +8,7 @@ import RegisterLabReport from './RegisterLabReport';
 import RegisterVisita from './RegisterVisit';
 import AlterItems from './AlterItems';
 import Axios from 'axios';
-import Button from '@material-ui/core/Button';
-import { Navbar, Nav } from 'react-bootstrap';
+import {Navbar, Nav, Button} from 'react-bootstrap';
 function RegisterDashboard() {
     Axios.defaults.withCredentials = true
     const handleLogOut = () => {

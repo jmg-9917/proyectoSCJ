@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import App from './App.css';
-import { BrowserRouter as Router, Link, Route, useHistory } from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, useHistory} from 'react-router-dom';
 import Axios from 'axios';
 import BuscarEvento from './BuscarEvento';
 import BuscarIntegrante from './BuscarIntegrante';
@@ -11,8 +11,8 @@ import WelcomeComponent from './WelcomeComponent';
 import UserProfileView from './UserProfileView';
 import ChosenUserView from './ChosenUserView';
 import BuscarVisitas from './BuscarVisita';
-import { Navbar, Nav } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 function Dashboard() {
     const [nombre, setNombre] = useState('');
     const history = useHistory();

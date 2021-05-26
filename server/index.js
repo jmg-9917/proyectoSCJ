@@ -16,7 +16,7 @@ app.use(cors({
 }));
 
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
     key: "userId",
@@ -163,7 +163,7 @@ app.post('/reCaptcha', async (req, res, next) => {
         const url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secret + "&response=" + req.body.token
 
         const response = await axios.post(url)
-        const { success } = response.data
+        const {success} = response.data
 
         if (success) {
             console.log(success)
@@ -187,7 +187,7 @@ app.post('/createLabReport', async (req, res) => {
     db.query("INSERT INTO practicas (nombre,descripcion,categoria) VALUES(?,?,?)",
         [nombre, descripcion, categoria],
         (err, result) => {
-            if (err) { console.log(err) }
+            if (err) {console.log(err)}
             else {
                 res.send(result)
 
@@ -203,20 +203,20 @@ app.post('/createMaterial', async (req, res) => {
     db.query("INSERT INTO materiales (nombre,tipo,cantidad) VALUES(?,?,?)",
         [nombre, tipo, cantidad],
         (err, result) => {
-            if (err) { console.log(err) }
+            if (err) {console.log(err)}
             else {
                 res.send(result)
 
             }
         })
     db.query("SELECT LAST_INSERT_ID()", (err, result) => {
-        if (err) { console.log(err) }
+        if (err) {console.log(err)}
         else {
             console.log("Last inserted material id :" + result[0]["LAST_INSERT_ID()"])
             lastInsertMatId = result[0]["LAST_INSERT_ID()"]
             db.query("INSERT INTO materiales_eventos (noEvento,idMateriales) VALUES (?,?)", [noEvento, lastInsertMatId],
                 (err, result) => {
-                    if (err) { console.log(err) }
+                    if (err) {console.log(err)}
                     else {
                         console.log(result)
                     }
@@ -234,7 +234,7 @@ app.post('/createVisit', async (req, res) => {
     db.query("INSERT INTO visitas (nombre,descripcion,categoria) VALUES(?,?,?)",
         [nombre, descripcion, categoria],
         (err, result) => {
-            if (err) { console.log(err) }
+            if (err) {console.log(err)}
             else {
                 res.send(result)
 
@@ -250,7 +250,7 @@ app.post('/createJunta', async (req, res) => {
     db.query("INSERT INTO Juntas (tipo,descripcion,participantes) VALUES(?,?,?)",
         [tipo, descripcion, partipantes],
         (err, result) => {
-            if (err) { console.log(err) }
+            if (err) {console.log(err)}
             else {
                 res.send(result)
 
@@ -273,8 +273,8 @@ app.post('/create', async (req, res) => {
         [nombre, apellidos, telefono, correo, password, fecha, puesto, activo],
         (err, result) => {
 
-            if (err) { console.log(err) }
-            else { res.send("Values inserted") }
+            if (err) {console.log(err)}
+            else {res.send("Values inserted")}
 
         }
     );
@@ -293,8 +293,8 @@ app.post('/createEvent', async (req, res) => {
         [nombre, ciudad, nacional, descripcion],
         (err, result) => {
 
-            if (err) { console.log(err) }
-            else { res.send("Values inserted") }
+            if (err) {console.log(err)}
+            else {res.send("Values inserted")}
 
         }
     );
@@ -307,8 +307,8 @@ app.post('/suscribeToMeeting', async (req, res) => {
     const fecha = req.body.fecha
     db.query("INSERT INTO integrante_juntas (idIntegrante,noJunta,fecha) VALUES (?,?,?)", [idIntegrante, noJuntas, fecha],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 
@@ -319,8 +319,8 @@ app.post('/suscribeToLabReport', async (req, res) => {
     const fecha = req.body.fecha
     db.query("INSERT INTO integrante_practica (idIntegrante,noPractica,fecha) VALUES (?,?,?)", [idIntegrante, noPractica, fecha],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 app.post('/suscribeToVisit', async (req, res) => {
@@ -330,8 +330,8 @@ app.post('/suscribeToVisit', async (req, res) => {
     const fecha = req.body.fecha
     db.query("INSERT INTO integrante_visitas (idIntegrante,noVisita,fecha) VALUES (?,?,?)", [idIntegrante, noVisita, fecha],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 app.post('/suscribeToEvent', async (req, res) => {
@@ -341,8 +341,8 @@ app.post('/suscribeToEvent', async (req, res) => {
     const fecha = req.body.fecha
     db.query("INSERT INTO integrante_evento (idIntegrante,noEvento,fecha) VALUES (?,?,?)", [idIntegrante, noEvento, fecha],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 app.post('/unsubscribeToEvent', async (req, res) => {
@@ -352,8 +352,8 @@ app.post('/unsubscribeToEvent', async (req, res) => {
     const fecha = req.body.fecha
     db.query("DELETE FROM integrante_evento WHERE idIntegrante=? AND noEvento=?", [idIntegrante, noEvento],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 app.post('/unsubscribeToVisit', async (req, res) => {
@@ -363,8 +363,8 @@ app.post('/unsubscribeToVisit', async (req, res) => {
     const fecha = req.body.fecha
     db.query("DELETE FROM integrante_visitas WHERE idIntegrante=? AND noVisita=?", [idIntegrante, noVisita],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 app.post('/unsubscribeToMeeting', async (req, res) => {
@@ -374,8 +374,8 @@ app.post('/unsubscribeToMeeting', async (req, res) => {
     const fecha = req.body.fecha
     db.query("DELETE FROM integrante_juntas WHERE idIntegrante=? AND noJunta=?", [idIntegrante, noJunta],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 app.post('/unsubscribeToLabReport', async (req, res) => {
@@ -385,8 +385,8 @@ app.post('/unsubscribeToLabReport', async (req, res) => {
     const fecha = req.body.fecha
     db.query("DELETE FROM integrante_practica WHERE idIntegrante=? AND noPractica=?", [idIntegrante, noPractica],
         (err, result) => {
-            if (err) { console.log(err) }
-            else { res.send('Values inserted') }
+            if (err) {console.log(err)}
+            else {res.send('Values inserted')}
         })
 })
 
@@ -400,7 +400,7 @@ app.delete('/deleteEvent/:id', async (req, res) => {
                 console.log(id)
                 console.log(err)
             }
-            else { res.send(result) }
+            else {res.send(result)}
         })
 })
 
@@ -415,7 +415,7 @@ app.delete('/deleteLabReport/:id', async (req, res) => {
                 console.log(id)
                 console.log(err)
             }
-            else { res.send(result) }
+            else {res.send(result)}
         })
 })
 app.delete('/deleteMeeting/:id', async (req, res) => {
@@ -428,7 +428,7 @@ app.delete('/deleteMeeting/:id', async (req, res) => {
                 console.log(id)
                 console.log(err)
             }
-            else { res.send(result) }
+            else {res.send(result)}
         })
 })
 app.delete('/deleteMaterial/:id', async (req, res) => {
@@ -441,7 +441,7 @@ app.delete('/deleteMaterial/:id', async (req, res) => {
                 console.log(id)
                 console.log(err)
             }
-            else { res.send(result) }
+            else {res.send(result)}
         })
 })
 app.delete('/deleteVisit/:id', async (req, res) => {
@@ -454,7 +454,7 @@ app.delete('/deleteVisit/:id', async (req, res) => {
                 console.log(id)
                 console.log(err)
             }
-            else { res.send(result) }
+            else {res.send(result)}
         })
 })
 app.delete('/deleteMember/:id', async (req, res) => {
@@ -467,17 +467,17 @@ app.delete('/deleteMember/:id', async (req, res) => {
                 console.log(id)
                 console.log(err)
             }
-            else { res.send(result) }
+            else {res.send(result)}
         })
 })
 
 app.get('/login', (req, res) => {
     if (req.session.user) {
 
-        res.send({ LoggedIn: true, user: [req.session.user] });
+        res.send({LoggedIn: true, user: [req.session.user]});
     }
     else {
-        res.send({ LoggedIn: false, user: [] });
+        res.send({LoggedIn: false, user: []});
     }
 })
 
@@ -489,7 +489,7 @@ app.post('/login', async (req, res) => {
         db.query("SELECT * FROM Integrante WHERE correo_electronico = ? AND contraseña =? ",
             [correo, password], (err, result) => {
                 if (err) {
-                    res.send({ err: err })
+                    res.send({err: err})
                 }
                 if (result) {
                     req.session.user = result;
@@ -497,7 +497,7 @@ app.post('/login', async (req, res) => {
                     res.send(result)
                 }
                 else {
-                    res.send({ message: "Wrong combination" })
+                    res.send({message: "Wrong combination"})
                 }
             })
 
@@ -630,14 +630,14 @@ app.post('/getUser', async (req, res) => {
         db.query("SELECT * FROM Integrantes WHERE idIntegrante = ? ",
             [idIntegrante], (err, result) => {
                 if (err) {
-                    res.send({ err: err })
+                    res.send({err: err})
                 }
                 if (result) {
                     console.log(req.session.user);
                     res.send(result)
                 }
                 else {
-                    res.send({ message: "Wrong combination" })
+                    res.send({message: "Wrong combination"})
                 }
             })
 

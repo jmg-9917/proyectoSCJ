@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { TextField } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import { Card, Button, Fade } from 'react-bootstrap';
-import { SubscribeToMeeting, UnsubscribeToMeeting } from './Subscription';
+import {TextField} from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
+import {Card, Button, Fade} from 'react-bootstrap';
+import {SubscribeToMeeting, UnsubscribeToMeeting} from './Subscription';
 function BuscarJunta() {
     const [idIntegrante, setIdIntegrante] = useState('')
     const history = useHistory()
@@ -36,7 +36,7 @@ function BuscarJunta() {
                     setJuntas(response.data)
                 }
             }, [])
-        return () => { isMounted = false };
+        return () => {isMounted = false};
 
     })
 

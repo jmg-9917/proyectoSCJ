@@ -33,6 +33,7 @@ const RegisterMeeting = () => {
                     descripcion: descripcion,
                 }).then(() => {
                     console.log("Junta registrada.")
+                    document.getElementById("integrante-form").reset();
                 })
                     .catch(e => {
                         setError(e)

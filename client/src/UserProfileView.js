@@ -37,17 +37,24 @@ function UserProfileView() {
             }
         })
     }
+    useEffect(() => {
+        Axios.defaults.withCredentials = true
+        let isMounted = true;
+        Axios.post("http://localhost:3002/subscribedMeetings", {
+            idIntegrante: idIntegrante
+        })
+            .then((response) => {
+                setJuntas(response.data)
+                console.log(response.data)
+
+            }, [])
+        return () => {isMounted = false};
+    })
+
+
     const viewMeetings = () => {
         setCounter(!counter)
         if (counter) {
-            Axios.post("http://localhost:3002/subscribedMeetings", {
-                idIntegrante: idIntegrante
-            })
-                .then((response) => {
-                    setJuntas(response.data)
-                    console.log(response.data)
-
-                })
 
         }
         else {

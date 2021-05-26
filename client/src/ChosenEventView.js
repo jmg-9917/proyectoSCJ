@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
-import { useHistory, Redirect } from 'react-router-dom';
-import { Container, Row, Col, Button, Fade, Card } from 'react-bootstrap';
-import { TextField } from '@material-ui/core';
+import {useHistory, Redirect} from 'react-router-dom';
+import {Container, Row, Col, Button, Fade, Card} from 'react-bootstrap';
+import {TextField} from '@material-ui/core';
 function ChosenEventView(props) {
     const history = useHistory();
     const eventInfo = props.location.state;
@@ -30,14 +30,14 @@ function ChosenEventView(props) {
                     setMateriales(response.data)
                 }
             }, [])
-        return () => { isMounted = false };
+        return () => {isMounted = false};
 
     })
     function received() {
         if (eventInfo) {
             return
         }
-        else { <Redirect to='/registerDashboard' /> }
+        else {<Redirect to='/registerDashboard' />}
     }
     received()
     const addMaterial = () => {
@@ -61,6 +61,7 @@ function ChosenEventView(props) {
         const numNacional = substituteForNum(nacional)
         const fechaArray = fecha.split('T')
         const first = fechaArray[0]
+        console.log(first)
         Axios.defaults.withCredentials = true
         Axios.put('http://localhost:3002/updateEvent', {
             noEvento: noEvento,
@@ -93,14 +94,17 @@ function ChosenEventView(props) {
     };
 
     const formatDate = (date) => {
-        const originalDate = date.split('-');
-        let reversedArr = originalDate.reverse()
-        let defaultValue = [];
-        reversedArr.map((val) => {
-            defaultValue.push(val)
-        })
-        console.log(defaultValue.join(',').replace(/,/g, '/').split())
-        return defaultValue[0]
+        if (date) {
+            const originalDate = date.split('-');
+            let reversedArr = originalDate.reverse()
+            let defaultValue = [];
+            reversedArr.map((val) => {
+                defaultValue.push(val)
+            })
+            return defaultValue[0]
+
+        }
+        else return ""
     }
 
     return (

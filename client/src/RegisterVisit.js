@@ -36,6 +36,7 @@ const RegisterVisita = () => {
                     categoria: categoria
                 }).then(() => {
                     console.log("Frontend and backend connected.")
+                    document.getElementById("integrante-form").reset();
                     alert("Practica registrada correctamente.")
                 })
 

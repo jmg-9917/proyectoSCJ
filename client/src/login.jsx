@@ -42,7 +42,7 @@ const LogIn = () => {
             errors.passwordError = true
         }
         else if (password.length > 3) {
-            errors.passwordError = true
+            errors.passwordError = false
             setPasswordError('')
         }
         return errors
@@ -50,46 +50,53 @@ const LogIn = () => {
 
 
     const ingresar = () => {
-        if (!token) {
-            setError("Verify captcha")
-            return;
+        const errorDetected = errorInFields()
+        if (errorDetected.emailError || errorDetected.passwordError) {
+            console.log(errorDetected)
         }
         else {
-            setError("")
+            setLogInStatus('')
+            if (!token) {
+                setError("Verify captcha")
+                return;
+            }
+            else {
+                setError("")
 
-            Axios.post('http://localhost:3002/reCaptcha', {
-                token: token
-            }).then(() => {
-                reCaptcha.current.reset();
-                setToken("");
-                alert("Sign in success");
+                Axios.post('http://localhost:3002/reCaptcha', {
+                    token: token
+                }).then(() => {
+                    reCaptcha.current.reset();
+                    setToken("");
 
-                Axios.post('http://localhost:3002/login', {
-                    correo: correo_electronico,
-                    password: password
-                }).then((response) => {
-                    if (response.data.length === 0) {
-                        console.log(response.data)
-                        setLogInStatus("No coincide.")
-                    }
-                    else {
-                        console.log("Frontend and backend connected.")
-                        if (response.data[0].nombre === 'admin') {
-                            history.push('/registerDashboard')
+                    Axios.post('http://localhost:3002/login', {
+                        correo: correo_electronico,
+                        password: password
+                    }).then((response) => {
+                        if (response.data.length === 0) {
+                            console.log(response.data)
+                            setLogInStatus("Verifique los datos ingresados.")
                         }
                         else {
-                            history.push('/dashboard')
+                            console.log("Frontend and backend connected.")
+                            if (response.data[0].nombre === 'admin') {
+                                history.push('/registerDashboard')
+                            }
+                            else {
+                                history.push('/dashboard')
+                            }
                         }
-                    }
-                })
+                    })
 
-            })
-                .catch(e => {
-                    setError(e)
                 })
-                .finally(() => {
-                    setToken("");
-                })
+                    .catch(e => {
+                        setError(e)
+                    })
+                    .finally(() => {
+                        setToken("");
+                    })
+
+            }
 
         }
 
@@ -136,6 +143,7 @@ const LogIn = () => {
                                 onExpired={e => setToken("")}
                                 ref={reCaptcha}
                             ></ReCAPTCHA>
+                            <label>{LogInStatus}</label>
                             <Button
                                 className="login-item"
                                 type="submit"

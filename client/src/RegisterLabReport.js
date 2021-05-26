@@ -1,10 +1,10 @@
 
 import './App.css';
-import { useState, useRef } from 'react';
+import {useState, useRef} from 'react';
 import Axios from 'axios'
 import React from 'react';
-import { TextField } from '@material-ui/core';
-import { Button } from 'react-bootstrap';
+import {TextField} from '@material-ui/core';
+import {Button} from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
 const RegisterPractica = () => {
     const [nombre, setNombre] = useState("");
@@ -36,6 +36,7 @@ const RegisterPractica = () => {
                     categoria: categoria
                 }).then(() => {
                     console.log("Frontend and backend connected.")
+                    document.getElementById("integrante-form").reset();
                     alert("Practica registrada correctamente.")
                 })
 
